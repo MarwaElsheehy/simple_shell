@@ -31,7 +31,7 @@ int be_locate(char x, char *y)
  *Return: if alpha 1 otherwise 0
  */
 
-int _veritable(int c)
+int _veritable(int x)
 {
 	if ((x >= 'a' && x <= 'z') || (x >= 'A' && x <= 'Z'))
 		return (1);
