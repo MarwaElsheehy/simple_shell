@@ -6,7 +6,7 @@
  *
  * Return: if real value is 1 otherwise 0
  */
-int real(void **t)
+int real(void **i)
 {
 	if (t && *t)
 	{
