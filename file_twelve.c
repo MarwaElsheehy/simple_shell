@@ -27,13 +27,13 @@ int be_locate(char x, char *y)
 
 /**
  *_veritable - review if alpha char or not
- *@x: a character
+ *@k: a character
  *Return: if alpha 1 otherwise 0
  */
 
-int _veritable(int x)
+int _veritable(int k)
 {
-	if ((x >= 'a' && x <= 'z') || (x >= 'A' && x <= 'Z'))
+	if ((k >= 'a' && k <= 'z') || (k >= 'A' && k <= 'Z'))
 		return (1);
 	else
 		return (0);
