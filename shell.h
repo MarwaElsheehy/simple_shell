@@ -142,7 +142,7 @@ char *concat(char *, char *, int);
 char *_charge(char *, char);
 
 /* file_seven.c */
-char *_copy(char *, char *);
+char *copy(char *, char *);
 char *_duplicate(const char *);
 void _lay(char *);
 int _force(char);
@@ -189,7 +189,7 @@ void rid_data(info_t *, int);
 /* file_sixteen.c */
 ssize_t take_chip(info_t *);
 int _getline(info_t *, char **, size_t *);
-void getpass(int);
+void hitPass(int);
 
 /* file_seventeen.c */
 char **take_environ(info_t *);
@@ -199,8 +199,8 @@ int _suitthough(info_t *, char *, char *);
 /* file_eighteen.c */
 char *_takethough(info_t *, const char *);
 int _though(info_t *);
-int _suitthough(info_t *);
-int _unsuitthough(info_t *);
+int suitthough(info_t *);
+int unsuitthough(info_t *);
 int reside_though_stream(info_t *);
 
 /* file_nineteen.c */
