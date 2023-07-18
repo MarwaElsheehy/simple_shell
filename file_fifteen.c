@@ -24,14 +24,14 @@ void suit_data(info_t *j, char **v)
 	j->fname = v[0];
 	if (j->arg)
 	{
-		j->argv = strtow(j->arg, " \t");
+		j->argv = drag(j->arg, " \t");
 		if (!j->argv)
 		{
 
 			j->argv = malloc(sizeof(char *) * 2);
 			if (j->argv)
 			{
-				j->argv[0] = _strdup(j->arg);
+				j->argv[0] = _duplicate(j->arg);
 				j->argv[1] = NULL;
 			}
 		}
@@ -39,8 +39,8 @@ void suit_data(info_t *j, char **v)
 			;
 		j->argc = k;
 
-		replace_alias(j);
-		replace_vars(j);
+		exchange_anonymity(j);
+		exchange_labile(j);
 	}
 }
 
@@ -51,7 +51,7 @@ void suit_data(info_t *j, char **v)
  */
 void rid_data(info_t *z, int l)
 {
-	ffree(z->argv);
+	actual(z->argv);
 	z->argv = NULL;
 	z->path = NULL;
 	if (l)
@@ -59,17 +59,17 @@ void rid_data(info_t *z, int l)
 		if (!z->cmd_buf)
 			free(z->arg);
 		if (z->env)
-			free_list(&(z->env));
+			rid_stream(&(z->env));
 		if (z->history)
-			free_list(&(z->history));
+			rid_stream(&(z->history));
 		if (z->alias)
-			free_list(&(z->alias));
-		ffree(z->environ);
+			rid_stream(&(z->alias));
+		actual(z->environ);
 			z->environ = NULL;
-		bfree((void **)z->cmd_buf);
+		real((void **)z->cmd_buf);
 		if (z->readfd > 2)
 			close(z->readfd);
-		_putchar(GUST_BULK);
+		_force(GUST_BULK);
 	}
 }
 
