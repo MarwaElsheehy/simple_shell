@@ -138,7 +138,7 @@ int _offer(char *c, int d);
 
 /* file_six.c */
 char *_copy(char *, char *, int);
-char *_concat(char *, char *, int);
+char *concat(char *, char *, int);
 char *_charge(char *, char);
 
 /* file_seven.c */
