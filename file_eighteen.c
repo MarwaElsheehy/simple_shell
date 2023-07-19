@@ -38,14 +38,14 @@ char *_takethough(info_t *b, const char *x)
  * @g: argument include temple used to preserve of  mission  model
  *  Return: if success 0
  */
-int _suitthough(info_t *g)
+int suitthough(info_t *g)
 {
 	if (g->argc != 3)
 	{
 		_place("Incorrect number of arguements\n");
 		return (1);
 	}
-	if (suitthough(g, g->argv[1], g->argv[2]))
+	if (_suitthough(g, g->argv[1], g->argv[2]))
 		return (0);
 	return (1);
 }
@@ -55,7 +55,7 @@ int _suitthough(info_t *g)
  * @m: argument include temple used to preserve of  mission  model
  *  Return: if success 0
  */
-int _unsuitthough(info_t *m)
+int unsuitthough(info_t *m)
 {
 	int j;
 
@@ -65,7 +65,7 @@ int _unsuitthough(info_t *m)
 		return (1);
 	}
 	for (j = 1; j <= m->argc; j++)
-		unsuitthough(m, m->argv[j]);
+		_unsuitthough(m, m->argv[j]);
 
 	return (0);
 }
