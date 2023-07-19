@@ -30,7 +30,7 @@
 #define SWITCH_LOWERCASE	1
 #define SWITCH_UNSIGNED	2
 
-#define SILENT_FILE	"shell_history"
+#define SILENT_FILE	".simple_shell_history"
 #define SILENT_MAX	4096
 
 extern char **environ;
