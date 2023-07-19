@@ -25,7 +25,7 @@ char *_takethough(info_t *b, const char *c)
 
 	while (n)
 	{
-		f = starts_with(n->str, c);
+		f = begins_with(n->str, c);
 		if (f && *f)
 			return (f);
 		n = n->close;
@@ -45,7 +45,7 @@ int _suitthough(info_t *g)
 		_place("Incorrect number of arguements\n");
 		return (1);
 	}
-	if (_suitthough(g, g->argv[1], g->argv[2]))
+	if (suitthough(g, g->argv[1], g->argv[2]))
 		return (0);
 	return (1);
 }
@@ -65,7 +65,7 @@ int _unsuitthough(info_t *m)
 		return (1);
 	}
 	for (j = 1; j <= m->argc; j++)
-		_unsuitthough(m, m->argv[i]);
+		unsuitthough(m, m->argv[i]);
 
 	return (0);
 }
