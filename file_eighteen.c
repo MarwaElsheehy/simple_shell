@@ -38,7 +38,7 @@ char *_takethough(info_t *b, const char *x)
  * @g: argument include temple used to preserve of  mission  model
  *  Return: if success 0
  */
-int suitthough(info_t *g)
+int response(info_t *g)
 {
 	if (g->argc != 3)
 	{
@@ -55,7 +55,7 @@ int suitthough(info_t *g)
  * @m: argument include temple used to preserve of  mission  model
  *  Return: if success 0
  */
-int unsuitthough(info_t *m)
+int unresponse(info_t *m)
 {
 	int j;
 
