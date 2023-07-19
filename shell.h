@@ -199,8 +199,8 @@ int _suitthough(info_t *, char *, char *);
 /* file_eighteen.c */
 char *_takethough(info_t *, const char *);
 int _though(info_t *);
-int suitthough(info_t *);
-int unsuitthough(info_t *);
+int response(info_t *);
+int unresponse(info_t *);
 int reside_though_stream(info_t *);
 
 /* file_nineteen.c */
