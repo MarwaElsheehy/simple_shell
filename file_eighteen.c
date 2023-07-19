@@ -14,18 +14,18 @@ int _though(info_t *a)
 /**
  * _takethough - transform the chain to int
  * @b: argument include temple used to preserve of  mission  model
- * @c: a character
+ * @x: a character
  *
  * Return: the value
  */
-char *_takethough(info_t *b, const char *c)
+char *_takethough(info_t *b, const char *x)
 {
 	list_t *n = b->env;
 	char *f;
 
 	while (n)
 	{
-		f = begins_with(n->str, c);
+		f = begins_with(n->c, x);
 		if (f && *f)
 			return (f);
 		n = n->close;
@@ -65,7 +65,7 @@ int _unsuitthough(info_t *m)
 		return (1);
 	}
 	for (j = 1; j <= m->argc; j++)
-		unsuitthough(m, m->argv[i]);
+		unsuitthough(m, m->argv[j]);
 
 	return (0);
 }
