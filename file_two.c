@@ -1,161 +1,157 @@
 #include "shell.h"
 
 /**
- * compile - main Shell Loop
- * @info: The Parameter & Return Info Struct
- * @xv: The argument Vector from main()
+ * compile - rid of vars of the parameters
+ * @i: heading of struct
+ * @v: the heading of zeros
  *
- * Return: 0 on success, 1 on error, or error code
+ * Return: if success 0
  */
-int compile(info_t *info, char **xv)
+int compile(info_t *i, char **v)
 {
-	ssize_t x = 0;
-	int Builtin_Ret = 0;
+	ssize_t y = 0;
+	int t = 0;
 
-	while (x != -1 && Builtin_Ret != -2)
+	while (y != -1 && t != -2)
 	{
-		clear_info(info);
-		if (ِActiveWin(info))
-			_puts("$ ");
-		_eputchar(BUF_FLUSH);
-		x = get_input(info);
-		if (x != -1)
+		remove_data(i);
+		if (honest(i))
+			_lay("$ ");
+		_design(GUST_BULK);
+		y = take_chip(i);
+		if (y != -1)
 		{
-			set_info(info, xv);
-			Builtin_Ret = detect_formation(info);
-			if (Builtin_Ret == -1)
-				detect_lead(info);
+			suit_data(i, v);
+			t = detect_formation(i);
+			if (t == -1)
+				detect_lead(i);
 		}
-		else if (ِActiveWin(info))
-			_putchar('\n');
-		free_info(info, 0);
+		else if (honest(i))
+			_force('\n');
+		rid_data(i, 0);
 	}
-	write_history(info);
-	free_info(info, 1);
-	if (!ِActiveWin(info) && info->status)
-		exit(info->status);
-	if (Builtin_Ret == -2)
+	boost_record(i);
+	rid_data(i, 1);
+	if (!honest(i) && i->status)
+		exit(i->status);
+	if (t == -2)
 	{
-		if (info->err_num == -1)
-			exit(info->status);
-		exit(info->err_num);
+		if (i->err_num == -1)
+			exit(i->status);
+		exit(i->err_num);
 	}
-	return (Builtin_Ret);
+	return (t);
 }
 
 /**
- * detect_formation - Finds a Builtin Command
- * @info: The Parameter & return Info struct
+ * detect_formation - suit the anonymity to the chain
+ * @a: review of the chain
  *
- * Return: -1 if builtin not found,
- *			0 if builtin executed successfully,
- *			1 if builtin found but not successful,
- *			-2 if builtin signals exit()
+ * Return: if successn 0 otherwise 1
  */
-int detect_formation(info_t *info)
+int detect_formation(info_t *a)
 {
-	int x, built_in_ret = -1;
-	builtin_table builtintbl[] = {
-		{"exit", Get_Exit},
-		{"env", current_env},
-		{"help", Help},
-		{"history", History},
-		{"setenv", _mysetenv},
-		{"unsetenv", _myunsetenv},
-		{"cd", Change_cd},
-		{"alias", _Alias},
+	int b, f = -1;
+	builtin_table formation[] = {
+		{"exit", _outlet},
+		{"env", _though},
+		{"help", _assist},
+		{"history", _common},
+		{"setenv", response},
+		{"unsetenv", unresponse},
+		{"cd", _compress},
+		{"alias", _anonymity},
 		{NULL, NULL}
 	};
 
-	for (x = 0; builtintbl[x].type; x++)
-		if (_strcmp(info->argv[0], builtintbl[x].type) == 0)
+	for (b = 0; formation[b].kind; b++)
+		if (_combine(a->argv[0], formation[b].kind) == 0)
 		{
-			info->line_count++;
-			built_in_ret = builtintbl[x].func(info);
+			a->line_count++;
+			f = formation[b].tsk(a);
 			break;
 		}
-	return (built_in_ret);
+	return (f);
 }
 
 /**
- * detect_lead - [inds a Command in PATH
- * @info: the parameter & return Info Struct
+ * detect_lead - review if it is a deli or not
+ * @j: argument include temple used to preserve of  mission  model
  *
- * Return: void
+ * Return: Always 0
  */
-void detect_lead(info_t *info)
+void detect_lead(info_t *j)
 {
-	char *path = NULL;
+	char *h = NULL;
 	int x, k;
 
-	info->path = info->argv[0];
-	if (info->linecount_flag == 1)
+	j->path = j->argv[0];
+	if (j->linecount_flag == 1)
 	{
-		info->line_count++;
-		info->linecount_flag = 0;
+		j->line_count++;
+		j->linecount_flag = 0;
 	}
-	for (x = 0, k = 0; info->arg[x]; x++)
-		if (!Is_Delimeter(info->arg[x], " \t\n"))
+	for (x = 0, k = 0; j->arg[x]; x++)
+		if (!be_locate(j->arg[x], " \t\n"))
 			k++;
 	if (!k)
 		return;
 
-	path = find_path(info, Get_Env(info, "PATH="), info->argv[0]);
-	if (path)
+	h = detect_route(j, _takethough(j, "PATH="), j->argv[0]);
+	if (h)
 	{
-		info->path = path;
-		spine_command(info);
+		j->path = h;
+		spine_command(j);
 	}
 	else
 	{
-		if ((ِActiveWin(info) || Get_Env(info, "PATH=")
-			|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
-			spine_command(info);
-		else if (*(info->arg) != '\n')
+		if ((honest(j) || _takethough(j, "PATH=")
+			|| j->argv[0][0] == '/') && be_lead(j, j->argv[0]))
+			spine_command(j);
+		else if (*(j->arg) != '\n')
 		{
-			info->status = 127;
-			print_error(info, "not found\n");
+			j->status = 127;
+			press_false(j, "not found\n");
 		}
 	}
 }
 
 /**
- * spine_command - forks a an exec Thread To run cmd
- * @info: the parameter & return info Struct
+ * spine_command - the heading of real pointer and zero values
+ * @q: argument include temple used to preserve of  mission  model
  *
- * Return: void
+ * Return: Always 0
  */
-void spine_command(info_t *info)
+void spine_command(info_t *q)
 {
-	pid_t child_pid;
+	pid_t w;
 
-	child_pid = fork();
-	if (child_pid == -1)
+	w = fork();
+	if (w == -1)
 	{
-		/* TODO: PUT ERROR FUNCTION */
+		
 		perror("Error:");
 		return;
 	}
-	if (child_pid == 0)
+	if (w == 0)
 	{
-		if (execve(info->path, info->argv, get_environ(info)) == -1)
+		if (execve(q->path, q->argv, take_environ(q)) == -1)
 		{
-			free_info(info, 1);
+			rid_data(q, 1);
 			if (errno == EACCES)
 				exit(126);
 			exit(1);
 		}
-		/* TODO: PUT ERROR FUNCTION */
+		
 	}
 	else
 	{
-		wait(&(info->status));
-		if (WIFEXITED(info->status))
+		wait(&(q->status));
+		if (WIFEXITED(q->status))
 		{
-			info->status = WEXITSTATUS(info->status);
-			if (info->status == 126)
-				print_error(info, "Permission denied\n");
+			q->status = WEXITSTATUS(q->status);
+			if (q->status == 126)
+				press_false(q, "Permission denied\n");
 		}
 	}
 }
-
