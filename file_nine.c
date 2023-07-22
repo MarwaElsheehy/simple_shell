@@ -2,40 +2,40 @@
 
 /**
  * **drag - Splits a String Into Words. Repeat Delimiters Are Ignored
- * @str: the Input string
- * @d: the Delimiter String
+ * @t: the Input string
+ * @r: the Delimiter String
  * Return: a pointer to an array of strings, or NULL on Failure
  */
 
-char **drag(char *str, char *d)
+char **drag(char *t, char *r)
 {
-    int x1, x2, x3, x4, numwords = 0;
+    int x1, x2, x3, x4, n = 0;
     char **result;
 
-    if (str == NULL || str[0] == 0)
+    if (t == NULL || t[0] == 0)
         return NULL;
 
-    if (!d)
-        d = " ";
+    if (!r)
+        r = " ";
 
-    for (x1 = 0; str[x1] != '\0'; x1++)
-        if (!Is_Delimiter(str[x1], d) && (Is_Delimiter(str[x1 + 1], d) || !str[x1 + 1]))
-            numwords++;
+    for (x1 = 0; t[x1] != '\0'; x1++)
+        if (!be_locate(t[x1], d) && (be_locate(t[x1 + 1], r) || !t[x1 + 1]))
+            n++;
 
-    if (numwords == 0)
+    if (n == 0)
         return NULL;
 
-    result = malloc((1 + numwords) * sizeof(char *));
+    result = malloc((1 + n) * sizeof(char *));
     if (!result)
         return NULL;
 
-    for (x1 = 0, x2 = 0; x2 < numwords; x2++)
+    for (x1 = 0, x2 = 0; x2 < n; x2++)
     {
-        while (Is_Delimiter(str[x1], d))
+        while (be_locate(t[x1], r))
             x1++;
 
         x3 = 0;
-        while (!Is_Delimiter(str[x1 + x3], d) && str[x1 + x3])
+        while (!be_locate(t[x1 + x3], r) && t[x1 + x3])
             x3++;
 
         result[x2] = malloc((x3 + 1) * sizeof(char));
@@ -48,7 +48,7 @@ char **drag(char *str, char *d)
         }
 
         for (x4 = 0; x4 < x3; x4++)
-            result[x2][x4] = str[x1++];
+            result[x2][x4] = t[x1++];
 
         result[x2][x4] = 0;
     }
@@ -59,37 +59,37 @@ char **drag(char *str, char *d)
 
 /**
  * **pull - Splits A String Into Words
- * @str: the input String
- * @d: the delimiter
+ * @i: the input String
+ * @j: the delimiter
  * Return: A pointer To an Array of Strings, or NULL on Failure
  */
-char **pull(char *str, char d)
+char **pull(char *i, char d)
 {
-    int x1, x2, x3, x4, numwords = 0;
+    int x1, x2, x3, x4, n = 0;
     char **result;
 
-    if (str == NULL || str[0] == 0)
+    if (i == NULL || i[0] == 0)
         return NULL;
 
-    for (x1 = 0; str[x1] != '\0'; x1++)
-        if ((str[x1] != d && str[x1 + 1] == d) ||
-            (str[x1] != d && !str[x1 + 1]) || str[x1 + 1] == d)
-            numwords++;
+    for (x1 = 0; i[x1] != '\0'; x1++)
+        if ((i[x1] != j && i[x1 + 1] == j) ||
+            (i[x1] != j && !i[x1 + 1]) || i[x1 + 1] == d)
+            n++;
 
-    if (numwords == 0)
+    if (n == 0)
         return NULL;
 
-    result = malloc((1 + numwords) * sizeof(char *));
+    result = malloc((1 + n) * sizeof(char *));
     if (!result)
         return NULL;
 
-    for (x1 = 0, x2 = 0; x2 < numwords; x2++)
+    for (x1 = 0, x2 = 0; x2 < n; x2++)
     {
-        while (str[x1] == d && str[x1] != d)
+        while (i[x1] == j && i[x1] != j)
             x1++;
 
         x3 = 0;
-        while (str[x1 + x3] != d && str[x1 + x3] && str[x1 + x3] != d)
+        while (i[x1 + x3] != d && i[x1 + x3] && i[x1 + x3] != d)
             x3++;
 
         result[x2] = malloc((x3 + 1) * sizeof(char));
@@ -102,7 +102,7 @@ char **pull(char *str, char d)
         }
 
         for (x4 = 0; x4 < x3; x4++)
-            result[x2][x4] = str[x1++];
+            result[x2][x4] = i[x1++];
 
         result[x2][x4] = 0;
     }
