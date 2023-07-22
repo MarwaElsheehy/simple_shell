@@ -89,7 +89,7 @@ char **pull(char *i, char j)
             x1++;
 
         x3 = 0;
-        while (i[x1 + x3] != d && i[x1 + x3] && i[x1 + x3] != d)
+        while (i[x1 + x3] != j && i[x1 + x3] && i[x1 + x3] != d)
             x3++;
 
         result[x2] = malloc((x3 + 1) * sizeof(char));
