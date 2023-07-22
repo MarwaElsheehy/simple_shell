@@ -63,7 +63,7 @@ char **drag(char *t, char *r)
  * @j: the delimiter
  * Return: A pointer To an Array of Strings, or NULL on Failure
  */
-char **pull(char *i, char d)
+char **pull(char *i, char j)
 {
     int x1, x2, x3, x4, n = 0;
     char **result;
