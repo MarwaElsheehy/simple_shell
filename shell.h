@@ -19,8 +19,9 @@
 
 
 #define READ_BULK 1024
-#define WRITE_BULK 1024
+#define WRITE_BULK_SIZE 1024
 #define GUST_BULK -1
+#define BUF_FLUSH '\n'
 
 
 #define UTILIZE_GETLINE 0
@@ -136,6 +137,7 @@ int _design(char);
 int _propose(char a, int b);
 int _offer(char *c, int d);
 
+
 /* file_six.c */
 char *_copy(char *, char *, int);
 char *concat(char *, char *, int);
@@ -155,6 +157,7 @@ void *_correct(void *, unsigned int, unsigned int);
 /* file_nine.c */
 char **drag(char *, char *);
 char **pull(char *, char);
+int Is_Delimiter(char ch, char *delimiters);
 
 /* file_ten.c */
 int real(void **);

@@ -1,21 +1,23 @@
 #include "shell.h"
 
+
+
 /**
  *_place - prints an input String
- * @str: the String to be Printed
+ * @S: the String to be Printed
  *
  * Return: Nothing
  */
-void _place(char *str)
+void _place(char *S)
 {
 	int x = 0;
 
-	if (!str)
+	if (!S)
 		return;
-	while (str[x] != '\0')
+	while (S[x] != '\0')
 	{
-		_design(str[x]);
-		i++;
+		_design(S[x]);
+		x++;
 	}
 }
 
@@ -28,16 +30,16 @@ void _place(char *str)
  */
 int _design(char Ch)
 {
-	static int i;
-	static char buf[WRITE_BUF_SIZE];
+	static int x;
+	static char buf[WRITE_BULK_SIZE];
 
-	if (Ch == BUF_FLUSH || i >= WRITE_BUF_SIZE)
+	if (Ch == BUF_FLUSH || x >= WRITE_BULK_SIZE)
 	{
-		write(2, buf, i);
-		i = 0;
+		write(2, buf, x);
+		x = 0;
 	}
 	if (Ch != BUF_FLUSH)
-		buf[i++] = Ch;
+		buf[x++] = Ch;
 	return (1);
 }
 
@@ -51,36 +53,36 @@ int _design(char Ch)
  */
 int _propose(char Ch, int fd)
 {
-	static int i;
-	static char buf[WRITE_BUF_SIZE];
+	static int x;
+	static char buf[WRITE_BULK_SIZE];
 
-	if (Ch == BUF_FLUSH || i >= WRITE_BUF_SIZE)
+	if (Ch == BUF_FLUSH || x >= WRITE_BULK_SIZE)
 	{
-		write(fd, buf, i);
-		i = 0;
+		write(fd, buf, x);
+		x = 0;
 	}
 	if (Ch != BUF_FLUSH)
-		buf[i++] = Ch;
+		buf[x++] = Ch;
 	return (1);
 }
 
 /**
  *_offer - Prints An Input String
- * @str: the String to be Printed
+ * @S: the String to be Printed
  * @fd: The filedescriptor to write to
  *
  * Return: the number of chars put
  */
-int _offer(char *str, int fd)
+int _offer(char *S, int fd)
 {
-	int i = 0;
+	int x = 0;
 
-	if (!str)
+	if (!S)
 		return (0);
-	while (*str)
+	while (*S)
 	{
-		i += _propose(*str++, fd);
+		x += _propose(*S++, fd);
 	}
-	return (i);
+	return (x);
 }
 

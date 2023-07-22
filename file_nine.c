@@ -1,95 +1,112 @@
 #include "shell.h"
 
 /**
- * **drag - Splits a String INto Words. Repeat Delimiters Are Ignored
+ * **drag - Splits a String Into Words. Repeat Delimiters Are Ignored
  * @str: the Input string
- * @d: the Delimeter String
- * Return: a pointer To An array Of STrings, or NULL on Failure
+ * @d: the Delimiter String
+ * Return: a pointer to an array of strings, or NULL on Failure
  */
 
 char **drag(char *str, char *d)
 {
-	int i, j, k, m, numwords = 0;
-	char **s;
+    int x1, x2, x3, x4, numwords = 0;
+    char **result;
 
-	if (str == NULL || str[0] == 0)
-		return (NULL);
-	if (!d)
-		d = " ";
-	for (i = 0; str[i] != '\0'; i++)
-		if (!Is_Delimeter(str[i], d) && (Is_Delimeter(str[i + 1], d) || !str[i + 1]))
-			numwords++;
+    if (str == NULL || str[0] == 0)
+        return NULL;
 
-	if (numwords == 0)
-		return (NULL);
-	s = malloc((1 + numwords) * sizeof(char *));
-	if (!s)
-		return (NULL);
-	for (i = 0, j = 0; j < numwords; j++)
-	{
-		while (Is_Delimeter(str[i], d))
-			i++;
-		k = 0;
-		while (!Is_Delimeter(str[i + k], d) && str[i + k])
-			k++;
-		s[j] = malloc((k + 1) * sizeof(char));
-		if (!s[j])
-		{
-			for (k = 0; k < j; k++)
-				free(s[k]);
-			free(s);
-			return (NULL);
-		}
-		for (m = 0; m < k; m++)
-			s[j][m] = str[i++];
-		s[j][m] = 0;
-	}
-	s[j] = NULL;
-	return (s);
+    if (!d)
+        d = " ";
+
+    for (x1 = 0; str[x1] != '\0'; x1++)
+        if (!Is_Delimiter(str[x1], d) && (Is_Delimiter(str[x1 + 1], d) || !str[x1 + 1]))
+            numwords++;
+
+    if (numwords == 0)
+        return NULL;
+
+    result = malloc((1 + numwords) * sizeof(char *));
+    if (!result)
+        return NULL;
+
+    for (x1 = 0, x2 = 0; x2 < numwords; x2++)
+    {
+        while (Is_Delimiter(str[x1], d))
+            x1++;
+
+        x3 = 0;
+        while (!Is_Delimiter(str[x1 + x3], d) && str[x1 + x3])
+            x3++;
+
+        result[x2] = malloc((x3 + 1) * sizeof(char));
+        if (!result[x2])
+        {
+            for (x4 = 0; x4 < x2; x4++)
+                free(result[x4]);
+            free(result);
+            return NULL;
+        }
+
+        for (x4 = 0; x4 < x3; x4++)
+            result[x2][x4] = str[x1++];
+
+        result[x2][x4] = 0;
+    }
+
+    result[x2] = NULL;
+    return result;
 }
 
 /**
  * **pull - Splits A String Into Words
  * @str: the input String
- * @d: the delimEter
+ * @d: the delimiter
  * Return: A pointer To an Array of Strings, or NULL on Failure
  */
 char **pull(char *str, char d)
 {
-	int i, j, k, m, numwords = 0;
-	char **s;
+    int x1, x2, x3, x4, numwords = 0;
+    char **result;
 
-	if (str == NULL || str[0] == 0)
-		return (NULL);
-	for (i = 0; str[i] != '\0'; i++)
-		if ((str[i] != d && str[i + 1] == d) ||
-		    (str[i] != d && !str[i + 1]) || str[i + 1] == d)
-			numwords++;
-	if (numwords == 0)
-		return (NULL);
-	s = malloc((1 + numwords) * sizeof(char *));
-	if (!s)
-		return (NULL);
-	for (i = 0, j = 0; j < numwords; j++)
-	{
-		while (str[i] == d && str[i] != d)
-			i++;
-		k = 0;
-		while (str[i + k] != d && str[i + k] && str[i + k] != d)
-			k++;
-		s[j] = malloc((k + 1) * sizeof(char));
-		if (!s[j])
-		{
-			for (k = 0; k < j; k++)
-				free(s[k]);
-			free(s);
-			return (NULL);
-		}
-		for (m = 0; m < k; m++)
-			s[j][m] = str[i++];
-		s[j][m] = 0;
-	}
-	s[j] = NULL;
-	return (s);
+    if (str == NULL || str[0] == 0)
+        return NULL;
+
+    for (x1 = 0; str[x1] != '\0'; x1++)
+        if ((str[x1] != d && str[x1 + 1] == d) ||
+            (str[x1] != d && !str[x1 + 1]) || str[x1 + 1] == d)
+            numwords++;
+
+    if (numwords == 0)
+        return NULL;
+
+    result = malloc((1 + numwords) * sizeof(char *));
+    if (!result)
+        return NULL;
+
+    for (x1 = 0, x2 = 0; x2 < numwords; x2++)
+    {
+        while (str[x1] == d && str[x1] != d)
+            x1++;
+
+        x3 = 0;
+        while (str[x1 + x3] != d && str[x1 + x3] && str[x1 + x3] != d)
+            x3++;
+
+        result[x2] = malloc((x3 + 1) * sizeof(char));
+        if (!result[x2])
+        {
+            for (x4 = 0; x4 < x2; x4++)
+                free(result[x4]);
+            free(result);
+            return NULL;
+        }
+
+        for (x4 = 0; x4 < x3; x4++)
+            result[x2][x4] = str[x1++];
+
+        result[x2][x4] = 0;
+    }
+
+    result[x2] = NULL;
+    return result;
 }
-
