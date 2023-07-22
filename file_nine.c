@@ -19,7 +19,7 @@ char **drag(char *t, char *r)
         r = " ";
 
     for (x1 = 0; t[x1] != '\0'; x1++)
-        if (!be_locate(t[x1], d) && (be_locate(t[x1 + 1], r) || !t[x1 + 1]))
+        if (!be_locate(t[x1], r) && (be_locate(t[x1 + 1], r) || !t[x1 + 1]))
             n++;
 
     if (n == 0)
@@ -73,7 +73,7 @@ char **pull(char *i, char d)
 
     for (x1 = 0; i[x1] != '\0'; x1++)
         if ((i[x1] != j && i[x1 + 1] == j) ||
-            (i[x1] != j && !i[x1 + 1]) || i[x1 + 1] == d)
+            (i[x1] != j && !i[x1 + 1]) || i[x1 + 1] == j)
             n++;
 
     if (n == 0)
