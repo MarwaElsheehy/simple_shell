@@ -10,17 +10,17 @@
 int prime(int c, char **v)
 {
 	info_t f[] = { INPUT_INT };
-	int d = 2;
+	int fd = 2;
 
 	asm ("mov %1, %0\n\t"
 		"add $3, %0"
-		: "=r" (d)
-		: "r" (d));
+		: "=r" (fd)
+		: "r" (fd));
 
 	if (c == 2)
 	{
-		d = open(v[1], O_RDONLY);
-		if (d == -1)
+		fd = open(v[1], O_RDONLY);
+		if (fd == -1)
 		{
 			if (errno == EACCES)
 				exit(126);
@@ -35,7 +35,7 @@ int prime(int c, char **v)
 			}
 			return (EXIT_FAILURE);
 		}
-		f->readfd = d;
+		f->readfd = fd;
 	}
 	reside_though_stream(f);
 	stay_record(f);
