@@ -31,14 +31,14 @@ void _place(char *S)
 int _design(char Ch)
 {
 	static int x;
-	static char buf[WRITE_BULK_SIZE];
+	static char buf[WRITE_BULK];
 
-	if (Ch == BUF_FLUSH || x >= WRITE_BULK_SIZE)
+	if (Ch == GUST_BULK || x >= WRITE_BULK)
 	{
 		write(2, buf, x);
 		x = 0;
 	}
-	if (Ch != BUF_FLUSH)
+	if (Ch != GUST_BULK)
 		buf[x++] = Ch;
 	return (1);
 }
@@ -54,14 +54,14 @@ int _design(char Ch)
 int _propose(char Ch, int fd)
 {
 	static int x;
-	static char buf[WRITE_BULK_SIZE];
+	static char buf[WRITE_BULK];
 
-	if (Ch == BUF_FLUSH || x >= WRITE_BULK_SIZE)
+	if (Ch == GUST_BULK || x >= WRITE_BULK)
 	{
 		write(fd, buf, x);
 		x = 0;
 	}
-	if (Ch != BUF_FLUSH)
+	if (Ch != GUST_BULK)
 		buf[x++] = Ch;
 	return (1);
 }
