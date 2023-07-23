@@ -1,88 +1,84 @@
 #include "shell.h"
 
-
-
 /**
- *_place - prints an input String
- * @S: the String to be Printed
+ *_place - press of the chain
+ * @r: the chain to be pressed
  *
- * Return: Nothing
+ * Return: Always 0
  */
-void _place(char *S)
+void _place(char *r)
 {
-	int x = 0;
+	int i = 0;
 
-	if (!S)
+	if (!r)
 		return;
-	while (S[x] != '\0')
+	while (r[i] != '\0')
 	{
-		_design(S[x]);
-		x++;
+		_design(r[i]);
+		i++;
 	}
 }
 
 /**
- * _design - Writes The Character Ch to Stderr
- * @Ch: The Character To be Printed
+ * _design - starts the information data
+ * @h: a char
  *
- * Return: On Success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * Return: Always 0
  */
-int _design(char Ch)
+int _design(char h)
 {
-	static int x;
-	static char buf[WRITE_BULK_SIZE];
+	static int j;
+	static char f[WRITE_BULK];
 
-	if (Ch == BUF_FLUSH || x >= WRITE_BULK_SIZE)
+	if (h == GUST_BULK || j >= WRITE_BULK)
 	{
-		write(2, buf, x);
-		x = 0;
+		write(2, f, j);
+		j = 0;
 	}
-	if (Ch != BUF_FLUSH)
-		buf[x++] = Ch;
+	if (h != GUST_BULK)
+		f[j++] = h;
 	return (1);
 }
 
 /**
- * _propose - Writes Whe Character Ch to Given fd
- * @Ch: The character to  be printed
- * @fd: The filedescriptor to write to
+ * _propose - transform the chain to int
+ * @v: a character
+ * @d: a pointer
  *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * Return: Always 0
  */
-int _propose(char Ch, int fd)
+int _propose(char v, int d)
 {
-	static int x;
-	static char buf[WRITE_BULK_SIZE];
+	static int k;
+	static char u[WRITE_BULK];
 
-	if (Ch == BUF_FLUSH || x >= WRITE_BULK_SIZE)
+	if (v == GUST_BULK || k >= WRITE_BULK)
 	{
-		write(fd, buf, x);
-		x = 0;
+		write(d, u, k);
+		k = 0;
 	}
-	if (Ch != BUF_FLUSH)
-		buf[x++] = Ch;
+	if (v != GUST_BULK)
+		u[k++] = v;
 	return (1);
 }
 
 /**
- *_offer - Prints An Input String
- * @S: the String to be Printed
- * @fd: The filedescriptor to write to
+ *_offer - the heading of real pointer and zero values
+ * @t: argument include temple used to preserve of  mission  model
+ * @z: The filedescriptor to write to
  *
  * Return: the number of chars put
  */
-int _offer(char *S, int fd)
+int _offer(char *t, int z)
 {
-	int x = 0;
+	int w = 0;
 
-	if (!S)
+	if (!t)
 		return (0);
-	while (*S)
+	while (*t)
 	{
-		x += _propose(*S++, fd);
+		w += _propose(*t++, z);
 	}
-	return (x);
+	return (w);
 }
 
