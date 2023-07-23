@@ -1,63 +1,63 @@
 #include "shell.h"
 
 /**
- **_trail - Fills MemOry With anumber of bytes to a givin Char
- *@Stri_ng: the pointer to filled memory area
- *@b: the byte to fill *Stri_ng with
- *@n: the amount of bytes to be filled
- *Return: (Stri_ng) a pointer to the memory area Stri_ng
+ **_trail - starts the information data
+ *@s: argument include temple used to preserve of  mission  model
+ *@b: a char
+ *@n: a number
+ *Return: Always 0
  */
-char *_trail(char *Stri_ng, char b, unsigned int n)
+char *_trail(char *s, char b, unsigned int n)
 {
-	unsigned int I = 0;
+	unsigned int j = 0;
 
-	for (I = 0; I < n; I++)
-		Stri_ng[I] = b;
-	return (Stri_ng);
+	for (j = 0; j < n; j++)
+		s[j] = b;
+	return (s);
 }
 
 /**
- * actual - Frees a String of strings momory
- * @pp: string of Strings
+ * actual - rid of the memory of the chain
+ * @l: the chain of the string
  */
-void actual(char **pp)
+void actual(char **l)
 {
-	char **a = pp;
+	char **c = l;
 
-	if (!pp)
+	if (!l)
 		return;
-	while (*pp)
-		free(*pp++);
-	free(a);
+	while (*l)
+		free(*l++);
+	free(c);
 }
 
 /**
- * _correct - Allocate A block Of momory
- * @ptr: pointer To Previous Malloc'ated Block
- * @old_size: byte size of the previous block
- * @new_size: byte size of the new block
+ * _correct - transform the chain to int
+ * @v: argument include temple used to preserve of  mission  model
+ * @e: a pointer
+ * @z: a character
  *
- * Return: pointer to da ol'block nameen.
+ * Return: Always 0
  */
-void *_correct(void *ptr, unsigned int old_size, unsigned int new_size)
+void *_correct(void *v, unsigned int e, unsigned int z)
 {
-	char *p;
+	char *w;
 
-	if (!ptr)
-		return (malloc(new_size));
-	if (!new_size)
-		return (free(ptr), NULL);
-	if (new_size == old_size)
-		return (ptr);
+	if (!v)
+		return (malloc(z));
+	if (!z)
+		return (free(v), NULL);
+	if (z == e)
+		return (v);
 
-	p = malloc(new_size);
-	if (!p)
+	w = malloc(z);
+	if (!w)
 		return (NULL);
 
-	old_size = old_size < new_size ? old_size : new_size;
-	while (old_size--)
-		p[old_size] = ((char *)ptr)[old_size];
-	free(ptr);
-	return (p);
+	e = e < z ? e : z;
+	while (e--)
+		w[e] = ((char *)v)[e];
+	free(v);
+	return (w);
 }
 
