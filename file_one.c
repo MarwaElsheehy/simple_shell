@@ -2,16 +2,16 @@
 
 /**
  * be_lead - starts the information data
- * @I: argument include temple used to preserve of  mission  model
+ * @i: argument include temple used to preserve of  mission  model
  * @p: string struct
  *
  * Return: if success 0
  */
-int be_lead(info_t *I, char *p)
+int be_lead(info_t *i, char *p)
 {
 	struct stat st;
 
-	(void)I;
+	(void)i;
 	if (!p || stat(p, &st))
 		return (0);
 
@@ -24,20 +24,20 @@ int be_lead(info_t *I, char *p)
 
 /**
  * call_edge - transform the chain to int
- * @Q: the route chain
- * @k: begin of the pass
+ * @j: the route chain
+ * @k: begin of the pass 
  * @l: end of the pass
  *
  * Return: Always 0
  */
-char *call_edge(char *Q, int k, int l)
+char *call_edge(char *j, int k, int l)
 {
 	static char a[1024];
 	int b = 0, c = 0;
 
 	for (c = 0, b = c; b < l; b++)
-		if (Q[b] != ':')
-			a[c++] = Q[b];
+		if (j[b] != ':')
+			a[c++] = j[b];
 	a[k] = 0;
 	return (a);
 }
