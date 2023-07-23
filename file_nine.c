@@ -19,7 +19,7 @@ char **drag(char *str, char *d)
         d = " ";
 
     for (x1 = 0; str[x1] != '\0'; x1++)
-        if (!Is_Delimiter(str[x1], d) && (Is_Delimiter(str[x1 + 1], d) || !str[x1 + 1]))
+        if (!be_locate(str[x1], d) && (be_locate(str[x1 + 1], d) || !str[x1 + 1]))
             numwords++;
 
     if (numwords == 0)
@@ -31,11 +31,11 @@ char **drag(char *str, char *d)
 
     for (x1 = 0, x2 = 0; x2 < numwords; x2++)
     {
-        while (Is_Delimiter(str[x1], d))
+        while (be_locate(str[x1], d))
             x1++;
 
         x3 = 0;
-        while (!Is_Delimiter(str[x1 + x3], d) && str[x1 + x3])
+        while (!be_locate(str[x1 + x3], d) && str[x1 + x3])
             x3++;
 
         result[x2] = malloc((x3 + 1) * sizeof(char));
