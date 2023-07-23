@@ -1,8 +1,8 @@
 #include "shell.h"
 
 /**
- *  _though - Begins the Information of the data
- * @a: temple d arguments used to preserve a mission  model
+ *  _though - starts the information data
+ * @a: argument include temple used to preserve of  mission  model
  * Return: if success 0
  */
 int _though(info_t *a)
@@ -12,7 +12,7 @@ int _though(info_t *a)
 }
 
 /**
- * _takethough - transform the chain into an int
+ * _takethough - transform the chain to int
  * @b: argument include temple used to preserve of  mission  model
  * @x: a character
  *
@@ -34,7 +34,7 @@ char *_takethough(info_t *b, const char *x)
 }
 
 /**
- *  response- The heading of Real Pointer and Zero Values
+ * _suitthough - the heading of real pointer and zero values
  * @g: argument include temple used to preserve of  mission  model
  *  Return: if success 0
  */
@@ -51,28 +51,28 @@ int response(info_t *g)
 }
 
 /**
- * unresponse - Review if it is a deli or not
+ * _unsuitthough - review if it is a deli or not
  * @m: argument include temple used to preserve of  mission  model
  *  Return: if success 0
  */
 int unresponse(info_t *m)
 {
-	int Q;
+	int j;
 
 	if (m->argc == 1)
 	{
 		_place("Too few arguements.\n");
 		return (1);
 	}
-	for (1 = Q ; Q <= m->argc; Q++)
-		_unsuitthough(m, m->argv[Q]);
+	for (j = 1; j <= m->argc; j++)
+		_unsuitthough(m, m->argv[j]);
 
 	return (0);
 }
 
 /**
- * reside_though_streamt - Begins the Information Data
- * @p: The Argument Include temple used to preserve of  Mission  model
+ * reside_though_stream - starts the information data
+ * @p: argument include temple used to preserve of  mission  model
  * Return: if success 0
  */
 int reside_though_streamt(info_t *p)
@@ -85,4 +85,6 @@ int reside_though_streamt(info_t *p)
 	p->env = n;
 	return (0);
 }
+
+
 
