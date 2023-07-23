@@ -9,7 +9,7 @@
  */
 char *_trail(char *Stri_ng, char b, unsigned int n)
 {
-	unsigned int I;
+	unsigned int I = 0;
 
 	for (I = 0; I < n; I++)
 		Stri_ng[I] = b;
@@ -17,7 +17,7 @@ char *_trail(char *Stri_ng, char b, unsigned int n)
 }
 
 /**
- * actual - Frees a String of strings momory 
+ * actual - Frees a String of strings momory
  * @pp: string of Strings
  */
 void actual(char **pp)
@@ -32,7 +32,7 @@ void actual(char **pp)
 }
 
 /**
- * _correct - Allocate A block Of momory 
+ * _correct - Allocate A block Of momory
  * @ptr: pointer To Previous Malloc'ated Block
  * @old_size: byte size of the previous block
  * @new_size: byte size of the new block

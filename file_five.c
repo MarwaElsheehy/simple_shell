@@ -23,7 +23,7 @@ void _place(char *S)
 
 /**
  * _design - Writes The Character Ch to Stderr
- * @Ch: The Character To be Printed 
+ * @Ch: The Character To be Printed
  *
  * Return: On Success 1.
  * On error, -1 is returned, and errno is set appropriately.

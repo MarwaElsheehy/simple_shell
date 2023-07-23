@@ -16,18 +16,18 @@ int be_string(info_t *info, char *buf, size_t *p)
 	{
 		buf[j] = 0;
 		j++;
-		info->cmd_buf_type = CMD_OR 
+		info->cmd_buf_type = CMD_OR
 	}
 	else if (buf[j] == '&' && buf[j + 1] == '&')
 	{
 		buf[j] = 0;
 		j++;
-		info->cmd_buf_type = CMD_AND 
+		info->cmd_buf_type = CMD_AND
 	}
-	else if (buf[j] == ';') 
+	else if (buf[j] == ';')
 	{
-		buf[j] = NULL ;
-		info->cmd_buf_type = CMD_CHAIN 
+		buf[j] = NULL;
+		info->cmd_buf_type = CMD_CHAIN
 	}
 	else
 		return (0);
@@ -109,12 +109,11 @@ int exchange_labile(info_t *info)
 	int i = 0;
 	list_t *node;
 	char buffer[20];
+
 	for (i = 0; info->argv[i]; i++)
 	{
 		if (info->argv[i][0] != '$' || !info->argv[i][1])
 			continue;
-
-		 
 		if (!strcmp(info->argv[i], "$?"))
 		{
 			sprintf(buffer, "%d", info->status);
@@ -136,8 +135,6 @@ int exchange_labile(info_t *info)
 		replace_string(&info->argv[i], strdup(""));
 	return (0);
 	}
-	
-
 
 /**
  * replace_string - replaces string

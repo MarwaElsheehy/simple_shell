@@ -3,7 +3,7 @@
 /**
  * copy - A Function which copys A String
  * @X: The Destination String
- * @y: The Source String 
+ * @y: The Source String
  *
  * Return: pointer to destination
  */

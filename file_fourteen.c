@@ -9,7 +9,7 @@ int _outlet(info_t *I)
 {
 	int k;
 
-	if (I->argv[1]) 
+	if (I->argv[1])
 	{
 		k = _resolve(I->argv[1]);
 		if (k == -1)
@@ -86,7 +86,7 @@ int _assist(info_t *v)
 	w = v->argv;
 	_lay("help call works. Function not yet implemented \n");
 	if (0)
-		_lay(*w); 
+		_lay(*w);
 	return (0);
 }
 

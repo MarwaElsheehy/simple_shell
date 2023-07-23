@@ -23,7 +23,7 @@ int _extent(char *Stri_ng)
  * @Stri_ng1: the First givin Strang
  * @Stri_ng2: the Second givin Strang
  *
- * Return: negative if Stri_ng1 < Stri_ng2, positive if Stri_ng1 > Stri_ng2, zero if Stri_ng1 == Stri_ng2
+ * Return: - if Stri_ng1 < Stri_ng2
  */
 int _combine(char *Stri_ng1, char *Stri_ng2)
 {
@@ -47,18 +47,18 @@ int _combine(char *Stri_ng1, char *Stri_ng2)
  *
  * Return: address of next char of HaYstack  or NULL
  */
-char *begins_with(const char *HaYstack , const char *NEEDLE)
+char *begins_with(const char *HaYstack, const char *NEEDLE)
 {
 	while (*NEEDLE)
-		if (*NEEDLE++ != *HaYstack ++)
+		if (*NEEDLE++ != *HaYstack++)
 			return (NULL);
-	return ((char *)HaYstack );
+	return ((char *)HaYstack);
 }
 
 /**
  * _concat - Merge two Givin strings
- * @De: the first givin 
- * @Sourse: The the second givin 
+ * @De: the first givin
+ * @Sourse: The the second givin
  *
  * Return: pointer to destination buffer
  */

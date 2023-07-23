@@ -80,7 +80,7 @@ int press_anonymity(list_t *n)
 
 /**
  * _anonymity - the anonymity buildin struct
- * @l: argument include temple used to preserve of  mission  model 
+ * @l: argument include temple used to preserve of  mission  model
  *  Return: if success 0
  */
 int _anonymity(info_t *l)

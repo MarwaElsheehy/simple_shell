@@ -31,7 +31,7 @@ char *_copy(char *De, char *Sourse, int n)
 }
 
 /**
- **concat - Merge Two Strings 
+ **concat - Merge Two Strings
  *@De: the First String
  *@Sourse: the Second String
  *@n: the Amount Of Bytes to Be Maximally Used

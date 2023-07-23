@@ -1,8 +1,8 @@
 #include "shell.h"
 
 /**
- * stream_extent - determines length of linked list
- * @h: pointer to first node
+ * stream_extent - Determines The Length Of linked list
+ * @h: pointer To The First Node
  *
  * Return: size of list
  */
@@ -12,14 +12,14 @@ size_t stream_extent(const list_t *h)
 
 	while (h)
 	{
-		h = h-> next;
+		h = h->next;
 		I++;
 	}
 	return (I);
 }
 
 /**
- * stream_at_chains - returns an array of strings of the list->str
+ * stream_at_chains - returns An Array Of Strings of The List->str
  * @head: pointer to first node
  *
  * Return: array of strings
@@ -36,9 +36,9 @@ char **stream_at_chains(list_t *head)
 	strs = malloc(sizeof(char *) * (I + 1));
 	if (!strs)
 		return (NULL);
-	for (I = 0; node; node = node-> next, I++)
+	for (I = 0; node; node = node->next, I++)
 	{
-		str = malloc(_extent(node-> str) + 1);
+		str = malloc(_extent(node->str) + 1);
 		if (!str)
 		{
 			for (Q = 0; Q < I; Q++)
@@ -56,8 +56,8 @@ char **stream_at_chains(list_t *head)
 
 
 /**
- * press_stream - prints all elements of a list_t linked list
- * @h: pointer to first node
+ * press_stream - Prints All The Elements of a list_t linked list
+ * @h: pointer to First node
  *
  * Return: size of list
  */
@@ -66,8 +66,9 @@ size_t press_stream(const list_t *h)
 	size_t I = 0;
 
 	while (h)
-	{
-		char buffer[20]; /*Adjust the buffer size as needed*/ 
+{
+		char buffer[20]; /*Adjust the buffer size as needed*/
+
 		sprintf(buffer, "%lu", (unsigned long)h->num);
 		putchar(':');
 		putchar(' ');
@@ -80,10 +81,10 @@ size_t press_stream(const list_t *h)
 }
 
 /**
- * nodule_begins_to - returns node whose string starts with prefix
- * @node: pointer to list head
- * @prefix: string to match
- * @Ch: the next character after prefix to match
+ * nodule_begins_to - Returns Node Whose String starts with "prefix"
+ * @node: pointer To List Head
+ * @prefix: String to Match
+ * @Ch: The next character After prefix to match
  *
  * Return: match node or null
  */
@@ -102,7 +103,7 @@ list_t *nodule_begins_to(list_t *node, char *prefix, char Ch)
 }
 
 /**
- * take_nodule_point - gets the index of a node
+ * take_nodule_point - gets the contents of a node
  * @head: pointer to list head
  * @node: pointer to the node
  *

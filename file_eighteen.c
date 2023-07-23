@@ -34,7 +34,7 @@ char *_takethough(info_t *b, const char *x)
 }
 
 /**
- * _suitthough - The heading of Real Pointer and Zero Values
+ *  response- The heading of Real Pointer and Zero Values
  * @g: argument include temple used to preserve of  mission  model
  *  Return: if success 0
  */
@@ -51,7 +51,7 @@ int response(info_t *g)
 }
 
 /**
- * _unsuitthough - Review if it is a deli or not
+ * unresponse - Review if it is a deli or not
  * @m: argument include temple used to preserve of  mission  model
  *  Return: if success 0
  */
@@ -64,14 +64,14 @@ int unresponse(info_t *m)
 		_place("Too few arguements.\n");
 		return (1);
 	}
-	for (Q = 1; Q <= m->argc; Q++)
+	for (1 = Q ; Q <= m->argc; Q++)
 		_unsuitthough(m, m->argv[Q]);
 
 	return (0);
 }
 
 /**
- * reside_though_stream - Begins the Information Data
+ * reside_though_streamt - Begins the Information Data
  * @p: The Argument Include temple used to preserve of  Mission  model
  * Return: if success 0
  */

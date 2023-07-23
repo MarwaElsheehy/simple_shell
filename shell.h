@@ -18,6 +18,9 @@
 #define LEAD_OR		1
 #define LEAD_AND		2
 #define LEAD_CHAIN	3
+#define CONVERT_LOWERCASE 1
+#define CONVERT_LOWERCASE 0
+#define CONVERT_UNSIGNED 1
 
 
 #define READ_BULK 1024

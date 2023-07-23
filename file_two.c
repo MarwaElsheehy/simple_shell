@@ -18,7 +18,7 @@ int compile(info_t *I, char **v)
 		if (honest(I))
 			_lay("$ ");
 		_design(GUST_BULK);
-		y = take_chip(I ,NULL ,NULL);
+		y = take_chip(I, NULL, NULL);
 		if (y != -1)
 		{
 			suit_data(I, v);
@@ -129,7 +129,6 @@ void spine_command(info_t *q)
 	w = fork();
 	if (w == -1)
 	{
-		
 		perror("Error:");
 		return;
 	}
@@ -142,7 +141,7 @@ void spine_command(info_t *q)
 				exit(126);
 			exit(1);
 		}
-		
+
 	}
 	else
 	{
