@@ -7,7 +7,7 @@
  *
  * Return: Always 0
  */
-int prime(int c, char **v)
+int main(int c, char **v)
 {
 	info_t f[] = { INPUT_INT };
 	int fd = 2;
