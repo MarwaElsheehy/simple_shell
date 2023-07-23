@@ -2,15 +2,15 @@
 
 /**
  * take_record_data - rid of vars of the parameters
- * @I: heading of struct
+ * @i: heading of struct
  * Return: Always 0
  */
 
-char *take_record_data(info_t *I)
+char *take_record_data(info_t *i)
 {
 	char *f, *r;
 
-	r = _takethough(I, "HOME=");
+	r = _takethough(i, "HOME=");
 	if (!r)
 		return (NULL);
 	f = malloc(sizeof(char) * (_extent(r) + _extent(SILENT_FILE) + 2));
@@ -25,14 +25,14 @@ char *take_record_data(info_t *I)
 
 /**
  * boost_record - the heading of real pointer and zero values
- * @Q: a deli chain
+ * @j: a deli chain
  *
  * Return: Always 0
  */
-int boost_record(info_t *Q)
+int boost_record(info_t *j)
 {
 	ssize_t d;
-	char *m = take_record_data(Q);
+	char *m = take_record_data(j);
 	list_t *n = NULL;
 
 	if (!m)
@@ -42,7 +42,7 @@ int boost_record(info_t *Q)
 	free(m);
 	if (d == -1)
 		return (-1);
-	for (n = Q->history; n; n = n->close)
+	for (n = j->history; n; n = n->close)
 	{
 		_offer(n->c, d);
 		_propose('\n', d);
@@ -60,7 +60,7 @@ int boost_record(info_t *Q)
 int stay_record(info_t *a)
 {
 	int x, l = 0, t = 0;
-	ssize_t d, r, Stri_ng = 0;
+	ssize_t d, r, s = 0;
 	struct stat st;
 	char *u = NULL, *e = take_record_data(a);
 
@@ -72,18 +72,18 @@ int stay_record(info_t *a)
 	if (d == -1)
 		return (0);
 	if (!fstat(d, &st))
-		Stri_ng = st.st_size;
-	if (Stri_ng < 2)
+		s = st.st_size;
+	if (s < 2)
 		return (0);
-	u = malloc(sizeof(char) * (Stri_ng + 1));
+	u = malloc(sizeof(char) * (s + 1));
 	if (!u)
 		return (0);
-	r = read(d, u, Stri_ng);
-	u[Stri_ng] = 0;
+	r = read(d, u, s);
+	u[s] = 0;
 	if (r <= 0)
 		return (free(u), 0);
 	close(d);
-	for (x = 0; x < Stri_ng; x++)
+	for (x = 0; x < s; x++)
 		if (u[x] == '\n')
 		{
 			u[x] = 0;
@@ -134,9 +134,8 @@ int rear_record(info_t *p)
 
 	while (n)
 	{
-		n->I = g++;
+		n->i = g++;
 		n = n->close;
 	}
 	return (p->histcount = g);
 }
-
