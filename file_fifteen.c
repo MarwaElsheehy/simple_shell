@@ -2,45 +2,45 @@
 
 /**
  * remove_data - starts the information data
- * @I: heading of struct
+ * @i: heading of struct
  */
-void remove_data(info_t *I)
+void remove_data(info_t *i)
 {
-	I->arg = NULL;
-	I->argv = NULL;
-	I->path = NULL;
-	I->argc = 0;
+	i->arg = NULL;
+	i->argv = NULL;
+	i->path = NULL;
+	i->argc = 0;
 }
 
 /**
  * suit_data - starts of information data
- * @Q: heading of struct
+ * @j: heading of struct
  * @v: wheel of args
  */
-void suit_data(info_t *Q, char **v)
+void suit_data(info_t *j, char **v)
 {
 	int k = 0;
 
-	Q->fname = v[0];
-	if (Q->arg)
+	j->fname = v[0];
+	if (j->arg)
 	{
-		Q->argv = drag(Q->arg, " \t");
-		if (!Q->argv)
+		j->argv = drag(j->arg, " \t");
+		if (!j->argv)
 		{
 
-			Q->argv = malloc(sizeof(char *) * 2);
-			if (Q->argv)
+			j->argv = malloc(sizeof(char *) * 2);
+			if (j->argv)
 			{
-				Q->argv[0] = _duplicate(Q->arg);
-				Q->argv[1] = NULL;
+				j->argv[0] = _duplicate(j->arg);
+				j->argv[1] = NULL;
 			}
 		}
-		for (k = 0; Q->argv && Q->argv[k]; k++)
+		for (k = 0; j->argv && j->argv[k]; k++)
 			;
-		Q->argc = k;
+		j->argc = k;
 
-		exchange_anonymity(Q);
-		exchange_labile(Q);
+		exchange_anonymity(j);
+		exchange_labile(j);
 	}
 }
 
