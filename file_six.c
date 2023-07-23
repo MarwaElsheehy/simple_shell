@@ -1,74 +1,74 @@
 #include "shell.h"
 
 /**
- **_strcat - copies a string
- *@dest: the Destination String to Be Copied To
- *@src: The sOurce sTring
+ **_copy - copies a string
+ *@De: the Destination String to Be Copied To
+ *@Sourse: The sOurce sTring
  *@n: tHe aMount of Characters to Be coPied
  *Return: the concatenated string
  */
-char *_strcat(char *dest, char *src, int n)
+char *_copy(char *De, char *Sourse, int n)
 {
-	int i, j;
-	char *s = dest;
+	int I, Q;
+	char *Stri_ng = De;
 
-	i = 0;
-	while (src[i] != '\0' && i < n - 1)
+	I = 0;
+	while (Sourse[I] != '\0' && I < n - 1)
 	{
-		dest[i] = src[i];
-		i++;
+		De[I] = Sourse[I];
+		I++;
 	}
-	if (i < n)
+	if (I < n)
 	{
-		j = i;
-		while (j < n)
+		Q = I;
+		while (Q < n)
 		{
-			dest[j] = '\0';
-			j++;
+			De[Q] = '\0';
+			Q++;
 		}
 	}
-	return (s);
+	return (Stri_ng);
 }
 
 /**
- **_strncat - Concatenates_Two Strings
- *@dest: the First String
- *@src: the Second String
+ **concat - Merge Two Strings 
+ *@De: the First String
+ *@Sourse: the Second String
  *@n: the Amount Of Bytes to Be Maximally Used
  *Return: the ConcaTenated String
  */
-char *_strncat(char *dest, char *src, int n)
+char *concat(char *De, char *Sourse, int n)
 {
-	int i, j;
-	char *s = dest;
+	int I, Q;
+	char *Stri_ng = De;
 
-	i = 0;
-	j = 0;
-	while (dest[i] != '\0')
-		i++;
-	while (src[j] != '\0' && j < n)
+	I = 0;
+	Q = 0;
+	while (De[I] != '\0')
+		I++;
+	while (Sourse[Q] != '\0' && Q < n)
 	{
-		dest[i] = src[j];
-		i++;
-		j++;
+		De[I] = Sourse[Q];
+		I++;
+		Q++;
 	}
-	if (j < n)
-		dest[i] = '\0';
-	return (s);
+	if (Q < n)
+		De[I] = '\0';
+	return (Stri_ng);
 }
 
 /**
- **_charge - locates A Character In a String
- *@s: the String To Be Parsed
+ **_charge - PUT A Character In a String
+ *@Stri_ng: the String To Be Parsed
  *@Ch: the Character To Look For
- *Return: (s) a pointer to The memory area s
+ *Return: (Stri_ng) a pointer to The memory area Stri_ng
  */
-char *_charge(char *s, char Ch)
+char *_charge(char *Stri_ng, char Ch)
 {
 	do {
-		if (*s == Ch)
-			return (s);
-	} while (*s++ != '\0');
+		if (*Stri_ng == Ch)
+			return (Stri_ng);
+	} while (*Stri_ng++ != '\0');
 
 	return (NULL);
 }

@@ -2,29 +2,29 @@
 
 /**
  * take_environ - gets the chain of the env function
- * @i: argument include temple used to preserve of  mission  model
+ * @I: argument include temple used to preserve of  mission  model
  * Return: if success 0
  */
-char **take_environ(info_t *i)
+char **take_environ(info_t *I)
 {
-	if (!i->environ || i->env_changed)
+	if (!I->environ || I->env_changed)
 	{
-		i->environ = stream_at_chains(i->env);
-		i->env_changed = 0;
+		I->environ = stream_at_chains(I->env);
+		I->env_changed = 0;
 	}
 
-	return (i->environ);
+	return (I->environ);
 }
 
 /**
  * _unsuitthough - rid of vars of the parameters
- * @j: argument include temple used to preserve of  mission  model
+ * @Q: argument include temple used to preserve of  mission  model
  * @v: the chain of the function
  */
-int _unsuitthough(info_t *j, char *v)
+int _unsuitthough(info_t *Q, char *v)
 {
-	list_t *n = j->env;
-	size_t i = 0;
+	list_t *n = Q->env;
+	size_t I = 0;
 	char *b;
 
 	if (!n || !v)
@@ -35,15 +35,15 @@ int _unsuitthough(info_t *j, char *v)
 		b = begins_with(n->c, v);
 		if (b && *b == '=')
 		{
-			j->env_changed = tense_nodule_at_point(&(j->env), i);
-			i = 0;
-			n = j->env;
+			Q->env_changed = tense_nodule_at_point(&(Q->env), I);
+			I = 0;
+			n = Q->env;
 			continue;
 		}
 		n = n->close;
-		j++;
+		Q++;
 	}
-	return (j->env_changed);
+	return (Q->env_changed);
 }
 
 /**

@@ -1,23 +1,23 @@
 #include "shell.h"
 
 /**
- **_trail - Fills MemOry With A Constant Byte
- *@s: the pointer TO The Memory Area
- *@b: the byte to fill *s with
+ **_trail - Fills MemOry With anumber of bytes to a givin Char
+ *@Stri_ng: the pointer to filled memory area
+ *@b: the byte to fill *Stri_ng with
  *@n: the amount of bytes to be filled
- *Return: (s) a pointer to the memory area s
+ *Return: (Stri_ng) a pointer to the memory area Stri_ng
  */
-char *_trail(char *s, char b, unsigned int n)
+char *_trail(char *Stri_ng, char b, unsigned int n)
 {
-	unsigned int i;
+	unsigned int I;
 
-	for (i = 0; i < n; i++)
-		s[i] = b;
-	return (s);
+	for (I = 0; I < n; I++)
+		Stri_ng[I] = b;
+	return (Stri_ng);
 }
 
 /**
- * actual - Frees a String Of Strings
+ * actual - Frees a String of strings momory 
  * @pp: string of Strings
  */
 void actual(char **pp)
@@ -32,10 +32,10 @@ void actual(char **pp)
 }
 
 /**
- * _correct - Reallocates A Block Of Memory
+ * _correct - Allocate A block Of momory 
  * @ptr: pointer To Previous Malloc'ated Block
- * @old_size: byte size of previous block
- * @new_size: byte size of new block
+ * @old_size: byte size of the previous block
+ * @new_size: byte size of the new block
  *
  * Return: pointer to da ol'block nameen.
  */

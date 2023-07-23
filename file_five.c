@@ -23,7 +23,7 @@ void _place(char *S)
 
 /**
  * _design - Writes The Character Ch to Stderr
- * @Ch: The Character To Print
+ * @Ch: The Character To be Printed 
  *
  * Return: On Success 1.
  * On error, -1 is returned, and errno is set appropriately.
@@ -31,21 +31,21 @@ void _place(char *S)
 int _design(char Ch)
 {
 	static int x;
-	static char buf[WRITE_BULK];
+	static char buf[WRITE_BULK_SIZE];
 
-	if (Ch == GUST_BULK || x >= WRITE_BULK)
+	if (Ch == BUF_FLUSH || x >= WRITE_BULK_SIZE)
 	{
 		write(2, buf, x);
 		x = 0;
 	}
-	if (Ch != GUST_BULK)
+	if (Ch != BUF_FLUSH)
 		buf[x++] = Ch;
 	return (1);
 }
 
 /**
  * _propose - Writes Whe Character Ch to Given fd
- * @Ch: The character to print
+ * @Ch: The character to  be printed
  * @fd: The filedescriptor to write to
  *
  * Return: On success 1.
@@ -54,14 +54,14 @@ int _design(char Ch)
 int _propose(char Ch, int fd)
 {
 	static int x;
-	static char buf[WRITE_BULK];
+	static char buf[WRITE_BULK_SIZE];
 
-	if (Ch == GUST_BULK || x >= WRITE_BULK)
+	if (Ch == BUF_FLUSH || x >= WRITE_BULK_SIZE)
 	{
 		write(fd, buf, x);
 		x = 0;
 	}
-	if (Ch != GUST_BULK)
+	if (Ch != BUF_FLUSH)
 		buf[x++] = Ch;
 	return (1);
 }

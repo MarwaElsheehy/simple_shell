@@ -11,6 +11,8 @@
 #include <limits.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <signal.h>
+
 
 #define LEAD_PLAIN	0
 #define LEAD_OR		1
@@ -19,9 +21,14 @@
 
 
 #define READ_BULK 1024
-#define WRITE_BULK 1024
+#define WRITE_BULK_SIZE 1024
 #define GUST_BULK -1
-
+#define BUF_FLUSH '\n'
+#define CMD_NORM 0
+#define CHIP_BUF_SIZE 1024 
+#define CMD_OR 
+#define CMD_AND
+#define CMD_CHAIN
 
 #define UTILIZE_GETLINE 0
 #define UTILIZE_STRTOK 0
@@ -38,16 +45,20 @@ extern char **environ;
 
 /**
  * struct stream - singly linked list
- * @i: a num scope
+ * @I: a num scope
  * @c: a str scope
  * @close: a posterior node
  */
 typedef struct stream
 {
-	int i;
+	int I;
 	char *c;
 	struct stream *close;
+	char *str;
+	int num;
+	struct stream *next;
 } list_t;
+
 
 /**
  *struct excuteinfo - holds false-args to overrun into a function,
@@ -95,6 +106,7 @@ typedef struct excuteinfo
 	int status;
 } info_t;
 
+
 #define INPUT_INT \
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
 	0, 0, 0}
@@ -136,6 +148,7 @@ int _design(char);
 int _propose(char a, int b);
 int _offer(char *c, int d);
 
+
 /* file_six.c */
 char *_copy(char *, char *, int);
 char *concat(char *, char *, int);
@@ -155,6 +168,7 @@ void *_correct(void *, unsigned int, unsigned int);
 /* file_nine.c */
 char **drag(char *, char *);
 char **pull(char *, char);
+int Is_Delimiter(char ch, char *delimiters);
 
 /* file_ten.c */
 int real(void **);
@@ -187,9 +201,16 @@ void suit_data(info_t *, char **);
 void rid_data(info_t *, int);
 
 /* file_sixteen.c */
-ssize_t take_chip(info_t *);
+ssize_t take_chip(info_t *info, char **buf, size_t *len);
 int _getline(info_t *, char **, size_t *);
 void hitPass(int);
+void sigintHandler(__attribute__((unused)) int sig_num);
+void remove_comments(char *buf);
+void build_history_list(info_t *info, char *buf, int histcount);
+void check_chip(info_t *info, char *buf, size_t *Q, size_t I, size_t len);
+int is_chip(info_t *info, char *buf, size_t *Q);
+void _puts(const char *str);
+
 
 /* file_seventeen.c */
 char **take_environ(info_t *);
@@ -223,8 +244,10 @@ void review_string(info_t *, char *, size_t *, size_t, size_t);
 int exchange_anonymity(info_t *);
 int exchange_labile(info_t *);
 int exchange_chain(char **, char *);
+int replace_string(char **old, char *new);
 
 /* file_twentytwo.c */
+
 size_t stream_extent(const list_t *);
 char **stream_at_chains(list_t *);
 size_t press_stream(const list_t *);
@@ -232,6 +255,4 @@ list_t *nodule_begins_to(list_t *, char *, char);
 ssize_t take_nodule_point(list_t *, list_t *);
 
 #endif
-
-
 

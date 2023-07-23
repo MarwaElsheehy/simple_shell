@@ -2,37 +2,37 @@
 
 /**
  * _outlet- outlet the husk
- * @i: argument include temple used to preserve of  mission  model
+ * @I: argument include temple used to preserve of  mission  model
  *  Return: if success 0 otherwise 1
  */
-int _outlet(info_t *i)
+int _outlet(info_t *I)
 {
 	int k;
 
-	if (i->argv[1]) 
+	if (I->argv[1]) 
 	{
-		k = _resolve(i->argv[1]);
+		k = _resolve(I->argv[1]);
 		if (k == -1)
 		{
-			i->status = 2;
-			press_false(i, "Illegal number: ");
-			_place(i->argv[1]);
+			I->status = 2;
+			press_false(I, "Illegal number: ");
+			_place(I->argv[1]);
 			_design('\n');
 			return (1);
 		}
-		i->err_num = _resolve(i->argv[1]);
+		I->err_num = _resolve(I->argv[1]);
 		return (-2);
 	}
-	i->err_num = -1;
+	I->err_num = -1;
 	return (-2);
 }
 
 /**
  * _compress - variation of the influx dir of the stream
- * @j: argument include temple used to preserve of  mission  model
+ * @Q: argument include temple used to preserve of  mission  model
  *  Return: if success 0 otherwise 1
  */
-int _compress(info_t *j)
+int _compress(info_t *Q)
 {
 	char *c, *d, b[1024];
 	int a;
@@ -40,36 +40,36 @@ int _compress(info_t *j)
 	c = getcwd(b, 1024);
 	if (!c)
 		_lay("TODO: >>getcwd failure emsg here<<\n");
-	if (!j->argv[1])
+	if (!Q->argv[1])
 	{
-		d = _takethough(j, "HOME=");
+		d = _takethough(Q, "HOME=");
 		if (!d)
-			a = chdir((d = _takethough(j, "PWD=")) ? d : "/");
+			a = chdir((d = _takethough(Q, "PWD=")) ? d : "/");
 		else
 			a = chdir(d);
 	}
-	else if (_combine(j->argv[1], "-") == 0)
+	else if (_combine(Q->argv[1], "-") == 0)
 	{
-		if (!_takethough(j, "OLDPWD="))
+		if (!_takethough(Q, "OLDPWD="))
 		{
 			_lay(c);
 			_force('\n');
 			return (1);
 		}
-		_lay(_takethough(j, "OLDPWD=")), _force('\n');
-		a = chdir((d = _takethough(j, "OLDPWD=")) ? d : "/");
+		_lay(_takethough(Q, "OLDPWD=")), _force('\n');
+		a = chdir((d = _takethough(Q, "OLDPWD=")) ? d : "/");
 	}
 	else
-		a = chdir(j->argv[1]);
+		a = chdir(Q->argv[1]);
 	if (a == -1)
 	{
-		press_false(j, "can't cd to ");
-		_place(j->argv[1]), _design('\n');
+		press_false(Q, "can't cd to ");
+		_place(Q->argv[1]), _design('\n');
 	}
 	else
 	{
-		_suitthough(j, "OLDPWD", _takethough(j, "PWD="));
-		_suitthough(j, "PWD", getcwd(b, 1024));
+		_suitthough(Q, "OLDPWD", _takethough(Q, "PWD="));
+		_suitthough(Q, "PWD", getcwd(b, 1024));
 	}
 	return (0);
 }

@@ -1,76 +1,76 @@
 #include "shell.h"
 
 /**
- * _extent - returns The Length Of A String
- * @s: The String whose Length to Check
+ * _extent - A function to return the lenght to a g iven string
+ * @Stri_ng: The String given to check its length
  *
  * Return: integer length of string
  */
-int _extent(char *s)
+int _extent(char *Stri_ng)
 {
-	int i = 0;
+	int I = 0;
 
-	if (!s)
+	if (!Stri_ng)
 		return (0);
 
-	while (*s++)
-		i++;
-	return (i);
+	while (*Stri_ng++)
+		I++;
+	return (I);
 }
 
 /**
- * _combine - Performs Lexicogarphic Comparison of Two strangs.
- * @s1: the First Strang
- * @s2: the Second Strang
+ * _combine - compare two givin Strings
+ * @Stri_ng1: the First givin Strang
+ * @Stri_ng2: the Second givin Strang
  *
- * Return: negative if s1 < s2, positive if s1 > s2, zero if s1 == s2
+ * Return: negative if Stri_ng1 < Stri_ng2, positive if Stri_ng1 > Stri_ng2, zero if Stri_ng1 == Stri_ng2
  */
-int _combine(char *s1, char *s2)
+int _combine(char *Stri_ng1, char *Stri_ng2)
 {
-	while (*s1 && *s2)
+	while (*Stri_ng1 && *Stri_ng2)
 	{
-		if (*s1 != *s2)
-			return (*s1 - *s2);
-		s1++;
-		s2++;
+		if (*Stri_ng1 != *Stri_ng2)
+			return (*Stri_ng1 - *Stri_ng2);
+		Stri_ng1++;
+		Stri_ng2++;
 	}
-	if (*s1 == *s2)
+	if (*Stri_ng1 == *Stri_ng2)
 		return (0);
 	else
-		return (*s1 < *s2 ? -1 : 1);
+		return (*Stri_ng1 < *Stri_ng2 ? -1 : 1);
 }
 
 /**
- * begins_with - Checks If needle Starts with haystack
- * @haystack: string to search
- * @needle: the substring to find
+ * begins_with - checks if theres sub String in a givin String
+ * @HaYstack : The String to searsh
+ * @NEEDLE: the Substring we want to find to find
  *
- * Return: address of next char of haystack or NULL
+ * Return: address of next char of HaYstack  or NULL
  */
-char *begins_with(const char *haystack, const char *needle)
+char *begins_with(const char *HaYstack , const char *NEEDLE)
 {
-	while (*needle)
-		if (*needle++ != *haystack++)
+	while (*NEEDLE)
+		if (*NEEDLE++ != *HaYstack ++)
 			return (NULL);
-	return ((char *)haystack);
+	return ((char *)HaYstack );
 }
 
 /**
- * _concat - Concatenates Two Strings
- * @dest: The Destination Buffer
- * @src: The source Buffer
+ * _concat - Merge two Givin strings
+ * @De: the first givin 
+ * @Sourse: The the second givin 
  *
  * Return: pointer to destination buffer
  */
-char *_concat(char *dest, char *src)
+char *_concat(char *De, char *Sourse)
 {
-	char *ret = dest;
+	char *Rt = De;
 
-	while (*dest)
-		dest++;
-	while (*src)
-		*dest++ = *src++;
-	*dest = *src;
-	return (ret);
+	while (*De)
+		De++;
+	while (*Sourse)
+		*De++ = *Sourse++;
+	*De = *Sourse;
+	return (Rt);
 }
 

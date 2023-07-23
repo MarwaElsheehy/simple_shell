@@ -2,43 +2,43 @@
 
 /**
  * compile - rid of vars of the parameters
- * @i: heading of struct
+ * @I: heading of struct
  * @v: the heading of zeros
  *
  * Return: if success 0
  */
-int compile(info_t *i, char **v)
+int compile(info_t *I, char **v)
 {
 	ssize_t y = 0;
 	int t = 0;
 
 	while (y != -1 && t != -2)
 	{
-		remove_data(i);
-		if (honest(i))
+		remove_data(I);
+		if (honest(I))
 			_lay("$ ");
 		_design(GUST_BULK);
-		y = take_chip(i);
+		y = take_chip(I ,NULL ,NULL);
 		if (y != -1)
 		{
-			suit_data(i, v);
-			t = detect_formation(i);
+			suit_data(I, v);
+			t = detect_formation(I);
 			if (t == -1)
-				detect_lead(i);
+				detect_lead(I);
 		}
-		else if (honest(i))
+		else if (honest(I))
 			_force('\n');
-		rid_data(i, 0);
+		rid_data(I, 0);
 	}
-	boost_record(i);
-	rid_data(i, 1);
-	if (!honest(i) && i->status)
-		exit(i->status);
+	boost_record(I);
+	rid_data(I, 1);
+	if (!honest(I) && I->status)
+		exit(I->status);
 	if (t == -2)
 	{
-		if (i->err_num == -1)
-			exit(i->status);
-		exit(i->err_num);
+		if (I->err_num == -1)
+			exit(I->status);
+		exit(I->err_num);
 	}
 	return (t);
 }
@@ -76,42 +76,42 @@ int detect_formation(info_t *a)
 
 /**
  * detect_lead - review if it is a deli or not
- * @j: argument include temple used to preserve of  mission  model
+ * @Q: argument include temple used to preserve of  mission  model
  *
  * Return: Always 0
  */
-void detect_lead(info_t *j)
+void detect_lead(info_t *Q)
 {
 	char *h = NULL;
 	int x, k;
 
-	j->path = j->argv[0];
-	if (j->linecount_flag == 1)
+	Q->path = Q->argv[0];
+	if (Q->linecount_flag == 1)
 	{
-		j->line_count++;
-		j->linecount_flag = 0;
+		Q->line_count++;
+		Q->linecount_flag = 0;
 	}
-	for (x = 0, k = 0; j->arg[x]; x++)
-		if (!be_locate(j->arg[x], " \t\n"))
+	for (x = 0, k = 0; Q->arg[x]; x++)
+		if (!be_locate(Q->arg[x], " \t\n"))
 			k++;
 	if (!k)
 		return;
 
-	h = detect_route(j, _takethough(j, "PATH="), j->argv[0]);
+	h = detect_route(Q, _takethough(Q, "PATH="), Q->argv[0]);
 	if (h)
 	{
-		j->path = h;
-		spine_command(j);
+		Q->path = h;
+		spine_command(Q);
 	}
 	else
 	{
-		if ((honest(j) || _takethough(j, "PATH=")
-			|| j->argv[0][0] == '/') && be_lead(j, j->argv[0]))
-			spine_command(j);
-		else if (*(j->arg) != '\n')
+		if ((honest(Q) || _takethough(Q, "PATH=")
+			|| Q->argv[0][0] == '/') && be_lead(Q, Q->argv[0]))
+			spine_command(Q);
+		else if (*(Q->arg) != '\n')
 		{
-			j->status = 127;
-			press_false(j, "not found\n");
+			Q->status = 127;
+			press_false(Q, "not found\n");
 		}
 	}
 }

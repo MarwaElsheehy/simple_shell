@@ -2,34 +2,34 @@
 
 /**
  * _common - show the common stream of numbers and chains begins at 0
- * @i: argument include temple used to preserve of  mission  model
+ * @I: argument include temple used to preserve of  mission  model
  *  Return: 0
  */
-int _common(info_t *i)
+int _common(info_t *I)
 {
-	press_stream(i->history);
+	press_stream(I->history);
 	return (0);
 }
 
 /**
  * unthough_anonymity- suit the anonymity to the chain
- * @j: model of the parameter
- * @s: the string alias the chain of anonymity
+ * @Q: model of the parameter
+ * @Stri_ng: the string alias the chain of anonymity
  *
  * Return: if success 1 otherwise 0
  */
-int unthough_anonymity(info_t *j, char *s)
+int unthough_anonymity(info_t *Q, char *Stri_ng)
 {
 	char *m, n;
 	int t;
 
-	m = _charge(s, '=');
+	m = _charge(Stri_ng, '=');
 	if (!m)
 		return (1);
 	n = *m;
 	*m = 0;
-	t = tense_nodule_at_point(&(j->alias),
-		take_nodule_point(j->alias, nodule_begins_to(j->alias, s, -1)));
+	t = tense_nodule_at_point(&(Q->alias),
+		take_nodule_point(Q->alias, nodule_begins_to(Q->alias, Stri_ng, -1)));
 	*m = n;
 	return (t);
 }
