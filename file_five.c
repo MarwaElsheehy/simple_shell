@@ -42,42 +42,42 @@ int _design(char h)
 
 /**
  * _propose - transform the chain to int
- * @v: a character
- * @d: a pointer
+ * @a: a character
+ * @b: a pointer
  *
  * Return: Always 0
  */
-int _propose(char v, int d)
+int _propose(char a, int b)
 {
 	static int k;
 	static char u[WRITE_BULK];
 
-	if (v == GUST_BULK || k >= WRITE_BULK)
+	if (a == GUST_BULK || k >= WRITE_BULK)
 	{
-		write(d, u, k);
+		write(b, u, k);
 		k = 0;
 	}
-	if (v != GUST_BULK)
-		u[k++] = v;
+	if (a != GUST_BULK)
+		u[k++] = a;
 	return (1);
 }
 
 /**
  *_offer - the heading of real pointer and zero values
- * @t: argument include temple used to preserve of  mission  model
- * @z: The filedescriptor to write to
+ * @c: argument include temple used to preserve of  mission  model
+ * @d: The filedescriptor to write to
  *
  * Return: the number of chars put
  */
-int _offer(char *t, int z)
+int _offer(char *c, int d)
 {
 	int w = 0;
 
-	if (!t)
+	if (!c)
 		return (0);
-	while (*t)
+	while (*c)
 	{
-		w += _propose(*t++, z);
+		w += _propose(*c++, d);
 	}
 	return (w);
 }
