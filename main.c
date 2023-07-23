@@ -9,7 +9,7 @@
  */
 int main(int c, char **v)
 {
-	info_t f[] = { INPUT_INT };
+	info_t data[] = { INPUT_INT };
 	int fd = 2;
 
 	asm ("mov %1, %0\n\t"
@@ -35,11 +35,11 @@ int main(int c, char **v)
 			}
 			return (EXIT_FAILURE);
 		}
-		f->readfd = fd;
+		data->readfd = fd;
 	}
-	reside_though_stream(f);
-	stay_record(f);
-	compile(f, v);
+	reside_though_stream(data);
+	stay_record(data);
+	compile(data, v);
 	return (EXIT_SUCCESS);
 }
 
