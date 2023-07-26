@@ -7,8 +7,10 @@
  *
  * Return: Always 0
  */
-int main(int c, char **v)
+int main()
 {
+	unsigned int c;
+	void **v = (void*)(uintptr_t)c;
 	info_t data[] = { INFO_INIT };
 	int fd = 2;
 
