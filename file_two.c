@@ -1,55 +1,55 @@
 #include "shell.h"
 
 /**
- * compile - rid of vars of the parameters
- * @i: heading of struct
- * @v: the heading of zeros
+ * hsh - rid of vars of the parameters
+ * @info: heading of struct
+ * @av: the heading of zeros
  *
  * Return: if success 0
  */
-int compile(info_t *i, char **v)
+int hsh(info_t *info, char **av)
 {
 	ssize_t y = 0;
 	int t = 0;
 
 	while (y != -1 && t != -2)
 	{
-		remove_data(i);
-		if (honest(i))
+		remove_data(info);
+		if (honest(info))
 			_lay("$ ");
 		_design(GUST_BULK);
-		y = take_chip(i);
+		y = take_chip(info);
 		if (y != -1)
 		{
-			suit_data(i, v);
-			t = detect_formation(i);
+			suit_data(info, av);
+			t = detect_formation(info);
 			if (t == -1)
-				detect_lead(i);
+				detect_lead(info);
 		}
-		else if (honest(i))
+		else if (honest(info))
 			_force('\n');
-		rid_data(i, 0);
+		rid_data(info, 0);
 	}
-	boost_record(i);
-	rid_data(i, 1);
-	if (!honest(i) && i->status)
-		exit(i->status);
+	boost_record(info);
+	rid_data(info, 1);
+	if (!honest(info) && info->status)
+		exit(info->status);
 	if (t == -2)
 	{
-		if (i->err_num == -1)
-			exit(i->status);
-		exit(i->err_num);
+		if (info->err_num == -1)
+			exit(info->status);
+		exit(info->err_num);
 	}
 	return (t);
 }
 
 /**
  * detect_formation - suit the anonymity to the chain
- * @a: review of the chain
+ * @info: review of the chain
  *
  * Return: if successn 0 otherwise 1
  */
-int detect_formation(info_t *a)
+int detect_formation(info_t *info)
 {
 	int b, f = -1;
 	builtin_table formation[] = {
@@ -65,10 +65,10 @@ int detect_formation(info_t *a)
 	};
 
 	for (b = 0; formation[b].kind; b++)
-		if (_combine(a->argv[0], formation[b].kind) == 0)
+		if (_combine(info->argv[0], formation[b].kind) == 0)
 		{
-			a->line_count++;
-			f = formation[b].tsk(a);
+			info->line_count++;
+			f = formation[b].tsk(info);
 			break;
 		}
 	return (f);
@@ -76,53 +76,53 @@ int detect_formation(info_t *a)
 
 /**
  * detect_lead - review if it is a deli or not
- * @j: argument include temple used to preserve of  mission  model
+ * @info: argument include temple used to preserve of  mission  model
  *
  * Return: Always 0
  */
-void detect_lead(info_t *j)
+void detect_lead(info_t *info)
 {
 	char *h = NULL;
 	int x, k;
 
-	j->path = j->argv[0];
-	if (j->linecount_flag == 1)
+	info->path = info->argv[0];
+	if (info->linecount_flag == 1)
 	{
-		j->line_count++;
-		j->linecount_flag = 0;
+		info->line_count++;
+		info->linecount_flag = 0;
 	}
-	for (x = 0, k = 0; j->arg[x]; x++)
-		if (!be_locate(j->arg[x], " \t\n"))
+	for (x = 0, k = 0; info->arg[x]; x++)
+		if (!be_locate(info->arg[x], " \t\n"))
 			k++;
 	if (!k)
 		return;
 
-	h = detect_route(j, _takethough(j, "PATH="), j->argv[0]);
+	h = detect_route(info, _takethough(info, "PATH="), info->argv[0]);
 	if (h)
 	{
-		j->path = h;
+		info->path = h;
 		spine_command(j);
 	}
 	else
 	{
-		if ((honest(j) || _takethough(j, "PATH=")
-			|| j->argv[0][0] == '/') && be_lead(j, j->argv[0]))
-			spine_command(j);
-		else if (*(j->arg) != '\n')
+		if ((honest(info) || _takethough(info, "PATH=")
+			|| info->argv[0][0] == '/') && be_lead(info, info->argv[0]))
+			spine_command(info);
+		else if (*(info->arg) != '\n')
 		{
-			j->status = 127;
-			press_false(j, "not found\n");
+			info->status = 127;
+			press_false(info, "not found\n");
 		}
 	}
 }
 
 /**
  * spine_command - the heading of real pointer and zero values
- * @q: argument include temple used to preserve of  mission  model
+ * @info: argument include temple used to preserve of  mission  model
  *
  * Return: Always 0
  */
-void spine_command(info_t *q)
+void spine_command(info_t *info)
 {
 	pid_t w;
 
@@ -135,9 +135,9 @@ void spine_command(info_t *q)
 	}
 	if (w == 0)
 	{
-		if (execve(q->path, q->argv, take_environ(q)) == -1)
+		if (execve(info->path, info->argv, take_environ(info)) == -1)
 		{
-			rid_data(q, 1);
+			rid_data(info, 1);
 			if (errno == EACCES)
 				exit(126);
 			exit(1);
@@ -146,12 +146,12 @@ void spine_command(info_t *q)
 	}
 	else
 	{
-		wait(&(q->status));
-		if (WIFEXITED(q->status))
+		wait(&(info->status));
+		if (WIFEXITED(info->status))
 		{
-			q->status = WEXITSTATUS(q->status);
-			if (q->status == 126)
-				press_false(q, "Permission denied\n");
+			info->status = WEXITSTATUS(q->status);
+			if (info->status == 126)
+				press_false(info, "Permission denied\n");
 		}
 	}
 }
