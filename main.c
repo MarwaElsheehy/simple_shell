@@ -12,8 +12,11 @@ int main()
 	unsigned int c;
 	char **v = (void*)(intptr_t)
 	info_t data[] = { INFO_INIT };
-	int fd;
-	fd = 2;
+	{
+	foo();
+        int fd = 0;
+        bar();
+        }
 
 	asm ("mov %1, %0\n\t"
 		"add $3, %0"
