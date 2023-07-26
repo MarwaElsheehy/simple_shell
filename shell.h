@@ -204,11 +204,11 @@ int unresponse(info_t *);
 int reside_though_stream(info_t *);
 
 /* file_nineteen.c */
-char *take_record_data(info_t *data);
-int boost_record(info_t *data);
-int stay_record(info_t *data);
-int erect_record_stream(info_t *data, char *pol, int linecount);
-int rear_record(info_t *data);
+char *take_record_data(info_t *info);
+int boost_record(info_t *info);
+int stay_record(info_t *info);
+int erect_record_stream(info_t *info, char *pol, int linecount);
+int rear_record(info_t *info);
 
 /* file_twenty.c */
 list_t *put_nodule(list_t **, const char *, int);
