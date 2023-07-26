@@ -11,7 +11,7 @@ int main()
 {
 	unsigned int c;
 	char **v = (void*)(intptr_t)
-	info_t data[] = { INFO_INIT };
+	info_t info[] = { INFO_INIT };
         int fd;
 	fd = 2;
 	
@@ -38,10 +38,10 @@ int main()
 			}
 			return (EXIT_FAILURE);
 		}
-		data->readfd = fd;
+		info->readfd = fd;
 	}
-	reside_though_stream(data);
-	stay_record(data);
-	compile(data, v);
+	reside_though_stream(info);
+	stay_record(info);
+	compile(info, v);
 	return (EXIT_SUCCESS);
 }
