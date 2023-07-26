@@ -11,6 +11,7 @@ int main()
 {
 	unsigned int c;
 	char **v = (void*)(intptr_t)
+	int info,
 	info_t info[] = { INFO_INIT };
         int fd;
 	fd = 2;
