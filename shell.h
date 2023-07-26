@@ -116,7 +116,7 @@ char *call_edge(char *, int, int);
 char *detect_route(info_t *, char *, char *);
 
 /* file_two.c */
-int compile(info_t *, char **);
+int hsh(info_t *, char **);
 int detect_formation(info_t *);
 void detect_lead(info_t *);
 void spine_command(info_t *);
