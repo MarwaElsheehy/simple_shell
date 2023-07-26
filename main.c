@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * prime - the main file
+ * main - the main file
  * @c: a char
  * @v: a number
  *
@@ -11,7 +11,7 @@ int main()
 {
 	unsigned int c;
 	char **v = (void*)(intptr_t)
-	int info_t data[] = { INFO_INIT };
+	info_t data[] = { INFO_INIT };
         int fd;
 	fd = 2;
 
