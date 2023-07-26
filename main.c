@@ -10,7 +10,7 @@
 int main()
 {
 	unsigned int c;
-	char **v = (void*)(intptr_t);
+	char **v = (void*)(intptr_t)
 	info_t data[] = { INFO_INIT };
 	int fd = 2;
 
