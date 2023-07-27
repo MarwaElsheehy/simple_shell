@@ -13,7 +13,7 @@ int main()
 {
         unsigned int ac;
 	char **av = (void*)(intptr_t)
-	// info_t info[] = { INFO_INIT };
+	info_t info[] = { INFO_INIT };
        
 	
 	asm ("mov %1, %0\n\t"
