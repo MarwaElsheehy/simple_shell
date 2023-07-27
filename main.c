@@ -37,7 +37,7 @@ int main()
 			}
 			return (EXIT_FAILURE);
 		}
-		info_t->readfd = fd;
+		info->readfd = fd;
 	}
 	reside_though_stream(info);
 	stay_record(info);
