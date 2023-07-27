@@ -22,9 +22,9 @@ int hsh(info_t *info, char **av)
 		if (y != -1)
 		{
 			suit_data(info, av);
-			t = detect_formation(info);
+			t = find_builtin(info);
 			if (t == -1)
-				detect_lead(info);
+				find_cmd(info);
 		}
 		else if (honest(info))
 			_force('\n');
@@ -44,12 +44,12 @@ int hsh(info_t *info, char **av)
 }
 
 /**
- * detect_formation - suit the anonymity to the chain
+ * find_builtin - suit the anonymity to the chain
  * @info: review of the chain
  *
  * Return: if successn 0 otherwise 1
  */
-int detect_formation(info_t *info)
+int find_builtin(info_t *info)
 {
 	int b, f = -1;
 	builtin_table formation[] = {
@@ -75,12 +75,12 @@ int detect_formation(info_t *info)
 }
 
 /**
- * detect_lead - review if it is a deli or not
+ * find_cmd - review if it is a deli or not
  * @info: argument include temple used to preserve of  mission  model
  *
  * Return: Always 0
  */
-void detect_lead(info_t *info)
+void find_cmd(info_t *info)
 {
 	char *h = NULL;
 	int x, k;
@@ -101,13 +101,13 @@ void detect_lead(info_t *info)
 	if (h)
 	{
 		info->path = h;
-		spine_command(j);
+		fork_cmd(info);
 	}
 	else
 	{
 		if ((honest(info) || _takethough(info, "PATH=")
 			|| info->argv[0][0] == '/') && be_lead(info, info->argv[0]))
-			spine_command(info);
+			fork_cmd(info);
 		else if (*(info->arg) != '\n')
 		{
 			info->status = 127;
@@ -117,12 +117,12 @@ void detect_lead(info_t *info)
 }
 
 /**
- * spine_command - the heading of real pointer and zero values
+ * fork_cmd - the heading of real pointer and zero values
  * @info: argument include temple used to preserve of  mission  model
  *
  * Return: Always 0
  */
-void spine_command(info_t *info)
+void fork_cmd(info_t *info)
 {
 	pid_t w;
 
