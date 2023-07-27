@@ -7,8 +7,10 @@
  *
  * Return: Always 0
  */
-int main(int ac, char **av)
+int main()
 {
+        unsigned int ac;
+	char **av = (void*)(intptr_t)
 	info_t info[] = { INFO_INIT };
         int fd =2;
 	
