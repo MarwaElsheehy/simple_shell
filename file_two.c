@@ -149,7 +149,7 @@ void fork_cmd(info_t *info)
 		wait(&(info->status));
 		if (WIFEXITED(info->status))
 		{
-			info->status = WEXITSTATUS(q->status);
+			info->status = WEXITSTATUS(info->status);
 			if (info->status == 126)
 				press_false(info, "Permission denied\n");
 		}
