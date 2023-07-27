@@ -117,9 +117,9 @@ char *detect_route(info_t *, char *, char *);
 
 /* file_two.c */
 int hsh(info_t *, char **);
-int detect_formation(info_t *);
-void detect_lead(info_t *);
-void spine_command(info_t *);
+int find_builtin(info_t *);
+void find_cmd(info_t *);
+void fork_cmd(info_t *);
 
 /* file_three.c */
 int noose(char **);
