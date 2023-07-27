@@ -8,7 +8,7 @@
  * Return: Always 0
  */
 int fd;
-fd = 2
+fd = 2;
 int main()
 {
         unsigned int ac;
