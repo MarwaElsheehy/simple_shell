@@ -18,10 +18,10 @@ char *_copy(char *De, char *Sourse, int n)
 		De[I] = Sourse[I];
 		I++;
 	}
-	if (I < n)
+	if (n < i)
 	{
 		Q = I;
-		while (Q < n)
+		while (n < Q)
 		{
 			De[Q] = '\0';
 			Q++;
@@ -52,7 +52,7 @@ char *concat(char *De, char *Sourse, int n)
 		I++;
 		Q++;
 	}
-	if (Q < n)
+	if (n < Q)
 		De[I] = '\0';
 	return (Stri_ng);
 }

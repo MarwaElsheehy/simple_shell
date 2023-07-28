@@ -25,8 +25,7 @@ int be_lead(info_t *i, char *p)
 /**
  * call_edge - transform the chain to int
  * @j: the route chain
- * @k: begin of the pass 
- * @l: end of the pass
+ * @k: begin of the pass
  *
  * Return: Always 0
  */

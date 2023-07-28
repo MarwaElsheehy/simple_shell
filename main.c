@@ -7,15 +7,15 @@
  *
  * Return: Always 0
  */
-int fd;
-fd = 2;
-int main()
+int main(void)
 {
-        unsigned int ac;
-	char **av = (void*)(intptr_t)
-	info_t info[] = { INFO_INIT };
-       
-	
+	int fd = 2;
+
+	unsigned int ac;
+	char **av = (void *)(intptr_t)
+	bettinfo_t info[] = { INFO_INIT };
+
+
 	asm ("mov %1, %0\n\t"
 		"add $3, %0"
 		: "=r" (fd)

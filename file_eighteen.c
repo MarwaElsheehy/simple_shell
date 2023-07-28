@@ -34,7 +34,7 @@ char *_takethough(info_t *b, const char *x)
 }
 
 /**
- * _suitthough - the heading of real pointer and zero values
+ * response - the heading of real pointer and zero values
  * @g: argument include temple used to preserve of  mission  model
  *  Return: if success 0
  */
@@ -51,7 +51,7 @@ int response(info_t *g)
 }
 
 /**
- * _unsuitthough - review if it is a deli or not
+ *  unresponse - review if it is a deli or not
  * @m: argument include temple used to preserve of  mission  model
  *  Return: if success 0
  */
@@ -71,7 +71,7 @@ int unresponse(info_t *m)
 }
 
 /**
- * reside_though_stream - starts the information data
+ * reside_though_streamt - starts the information data
  * @p: argument include temple used to preserve of  mission  model
  * Return: if success 0
  */
