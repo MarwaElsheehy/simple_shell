@@ -1,84 +1,86 @@
 #include "shell.h"
 
 /**
- *_place - press of the chain
- * @r: the chain to be pressed
+ *_eputs - prints an input string
+ * @str: the string to be printed
  *
- * Return: Always 0
+ * Return: Nothing
  */
-void _place(char *r)
+void _eputs(char *str)
 {
 	int i = 0;
 
-	if (!r)
+	if (!str)
 		return;
-	while (r[i] != '\0')
+	while (str[i] != '\0')
 	{
-		_design(r[i]);
+		_eputchar(str[i]);
 		i++;
 	}
 }
 
 /**
- * _design - starts the information data
- * @h: a char
+ * _eputchar - writes the character c to stderr
+ * @c: The character to print
  *
- * Return: Always 0
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
  */
-int _design(char h)
+int _eputchar(char c)
 {
-	static int j;
-	static char f[WRITE_BULK];
+	static int i;
+	static char buf[WRITE_BUF_SIZE];
 
-	if (h == GUST_BULK || j >= WRITE_BULK)
+	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
 	{
-		write(2, f, j);
-		j = 0;
+		write(2, buf, i);
+		i = 0;
 	}
-	if (h != GUST_BULK)
-		f[j++] = h;
+	if (c != BUF_FLUSH)
+		buf[i++] = c;
 	return (1);
 }
 
 /**
- * _propose - transform the chain to int
- * @a: a character
- * @b: a pointer
+ * _putfd - writes the character c to given fd
+ * @c: The character to print
+ * @fd: The filedescriptor to write to
  *
- * Return: Always 0
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
  */
-int _propose(char a, int b)
+int _putfd(char c, int fd)
 {
-	static int k;
-	static char u[WRITE_BULK];
+	static int i;
+	static char buf[WRITE_BUF_SIZE];
 
-	if (a == GUST_BULK || k >= WRITE_BULK)
+	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
 	{
-		write(b, u, k);
-		k = 0;
+		write(fd, buf, i);
+		i = 0;
 	}
-	if (a != GUST_BULK)
-		u[k++] = a;
+	if (c != BUF_FLUSH)
+		buf[i++] = c;
 	return (1);
 }
 
 /**
- *_offer - the heading of real pointer and zero values
- * @c: argument include temple used to preserve of  mission  model
- * @d: The filedescriptor to write to
+ *_putsfd - prints an input string
+ * @str: the string to be printed
+ * @fd: the filedescriptor to write to
  *
  * Return: the number of chars put
  */
-int _offer(char *c, int d)
+int _putsfd(char *str, int fd)
 {
-	int w = 0;
+	int i = 0;
 
-	if (!c)
+	if (!str)
 		return (0);
-	while (*c)
+	while (*str)
 	{
-		w += _propose(*c++, d);
+		i += _putfd(*str++, fd);
 	}
-	return (w);
+	return (i);
 }
 
