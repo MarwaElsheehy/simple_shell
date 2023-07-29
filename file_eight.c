@@ -1,63 +1,63 @@
 #include "shell.h"
 
 /**
- **_trail - starts the information data
- *@s: argument include temple used to preserve of  mission  model
- *@b: a char
- *@n: a number
- *Return: Always 0
+ **_memset - fills memory with a constant byte
+ *@s: the pointer to the memory area
+ *@b: the byte to fill *s with
+ *@n: the amount of bytes to be filled
+ *Return: (s) a pointer to the memory area s
  */
-char *_trail(char *s, char b, unsigned int n)
+char *_memset(char *s, char b, unsigned int n)
 {
-	unsigned int j = 0;
+	unsigned int i;
 
-	for (j = 0; j < n; j++)
-		s[j] = b;
+	for (i = 0; i < n; i++)
+		s[i] = b;
 	return (s);
 }
 
 /**
- * actual - rid of the memory of the chain
- * @l: the chain of the string
+ * ffree - frees a string of strings
+ * @pp: string of strings
  */
-void actual(char **l)
+void ffree(char **pp)
 {
-	char **c = l;
+	char **a = pp;
 
-	if (!l)
+	if (!pp)
 		return;
-	while (*l)
-		free(*l++);
-	free(c);
+	while (*pp)
+		free(*pp++);
+	free(a);
 }
 
 /**
- * _correct - transform the chain to int
- * @v: argument include temple used to preserve of  mission  model
- * @e: a pointer
- * @z: a character
+ * _realloc - reallocates a block of memory
+ * @ptr: pointer to previous malloc'ated block
+ * @old_size: byte size of previous block
+ * @new_size: byte size of new block
  *
- * Return: Always 0
+ * Return: pointer to da ol'block nameen.
  */
-void *_correct(void *v, unsigned int e, unsigned int z)
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-	char *w;
+	char *p;
 
-	if (!v)
-		return (malloc(z));
-	if (!z)
-		return (free(v), NULL);
-	if (z == e)
-		return (v);
+	if (!ptr)
+		return (malloc(new_size));
+	if (!new_size)
+		return (free(ptr), NULL);
+	if (new_size == old_size)
+		return (ptr);
 
-	w = malloc(z);
-	if (!w)
+	p = malloc(new_size);
+	if (!p)
 		return (NULL);
 
-	e = e < z ? e : z;
-	while (e--)
-		w[e] = ((char *)v)[e];
-	free(v);
-	return (w);
+	old_size = old_size < new_size ? old_size : new_size;
+	while (old_size--)
+		p[old_size] = ((char *)ptr)[old_size];
+	free(ptr);
+	return (p);
 }
 
