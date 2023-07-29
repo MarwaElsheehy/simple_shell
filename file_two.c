@@ -1,89 +1,92 @@
 #include "shell.h"
 
 /**
- * hsh - rid of vars of the parameters
- * @info: heading of struct
- * @av: the heading of zeros
+ * hsh - main shell loop
+ * @info: the parameter & return info struct
+ * @av: the argument vector from main()
  *
- * Return: if success 0
+ * Return: 0 on success, 1 on error, or error code
  */
 int hsh(info_t *info, char **av)
 {
-	ssize_t y = 0;
-	int t = 0;
+	ssize_t r = 0;
+	int builtin_ret = 0;
 
-	while (y != -1 && t != -2)
+	while (r != -1 && builtin_ret != -2)
 	{
-		remove_data(info);
-		if (honest(info))
-			_lay("$ ");
-		_design(GUST_BULK);
-		y = take_chip(info);
-		if (y != -1)
+		clear_info(info);
+		if (interactive(info))
+			_puts("$ ");
+		_eputchar(BUF_FLUSH);
+		r = get_input(info);
+		if (r != -1)
 		{
-			suit_data(info, av);
-			t = find_builtin(info);
-			if (t == -1)
+			set_info(info, av);
+			builtin_ret = find_builtin(info);
+			if (builtin_ret == -1)
 				find_cmd(info);
 		}
-		else if (honest(info))
-			_force('\n');
-		rid_data(info, 0);
+		else if (interactive(info))
+			_putchar('\n');
+		free_info(info, 0);
 	}
-	boost_record(info);
-	rid_data(info, 1);
-	if (!honest(info) && info->status)
+	write_history(info);
+	free_info(info, 1);
+	if (!interactive(info) && info->status)
 		exit(info->status);
-	if (t == -2)
+	if (builtin_ret == -2)
 	{
 		if (info->err_num == -1)
 			exit(info->status);
 		exit(info->err_num);
 	}
-	return (t);
+	return (builtin_ret);
 }
 
 /**
- * find_builtin - suit the anonymity to the chain
- * @info: review of the chain
+ * find_builtin - finds a builtin command
+ * @info: the parameter & return info struct
  *
- * Return: if successn 0 otherwise 1
+ * Return: -1 if builtin not found,
+ *			0 if builtin executed successfully,
+ *			1 if builtin found but not successful,
+ *			-2 if builtin signals exit()
  */
 int find_builtin(info_t *info)
 {
-	int b, f = -1;
-	builtin_table formation[] = {
-		{"exit", _outlet},
-		{"env", _though},
-		{"help", _assist},
-		{"history", _common},
-		{"setenv", response},
-		{"unsetenv", unresponse},
-		{"cd", _compress},
-		{"alias", _anonymity},
+	int i, built_in_ret = -1;
+	builtin_table builtintbl[] = {
+		{"exit", _myexit},
+		{"env", _myenv},
+		{"help", _myhelp},
+		{"history", _myhistory},
+		{"setenv", _mysetenv},
+		{"unsetenv", _myunsetenv},
+		{"cd", _mycd},
+		{"alias", _myalias},
 		{NULL, NULL}
 	};
 
-	for (b = 0; formation[b].kind; b++)
-		if (_combine(info->argv[0], formation[b].kind) == 0)
+	for (i = 0; builtintbl[i].type; i++)
+		if (_strcmp(info->argv[0], builtintbl[i].type) == 0)
 		{
 			info->line_count++;
-			f = formation[b].tsk(info);
+			built_in_ret = builtintbl[i].func(info);
 			break;
 		}
-	return (f);
+	return (built_in_ret);
 }
 
 /**
- * find_cmd - review if it is a deli or not
- * @info: argument include temple used to preserve of  mission  model
+ * find_cmd - finds a command in PATH
+ * @info: the parameter & return info struct
  *
- * Return: Always 0
+ * Return: void
  */
 void find_cmd(info_t *info)
 {
-	char *h = NULL;
-	int x, k;
+	char *path = NULL;
+	int i, k;
 
 	info->path = info->argv[0];
 	if (info->linecount_flag == 1)
@@ -91,58 +94,58 @@ void find_cmd(info_t *info)
 		info->line_count++;
 		info->linecount_flag = 0;
 	}
-	for (x = 0, k = 0; info->arg[x]; x++)
-		if (!be_locate(info->arg[x], " \t\n"))
+	for (i = 0, k = 0; info->arg[i]; i++)
+		if (!is_delim(info->arg[i], " \t\n"))
 			k++;
 	if (!k)
 		return;
 
-	h = detect_route(info, _takethough(info, "PATH="), info->argv[0]);
-	if (h)
+	path = find_path(info, _getenv(info, "PATH="), info->argv[0]);
+	if (path)
 	{
-		info->path = h;
+		info->path = path;
 		fork_cmd(info);
 	}
 	else
 	{
-		if ((honest(info) || _takethough(info, "PATH=")
-			|| info->argv[0][0] == '/') && be_lead(info, info->argv[0]))
+		if ((interactive(info) || _getenv(info, "PATH=")
+			|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
 			fork_cmd(info);
 		else if (*(info->arg) != '\n')
 		{
 			info->status = 127;
-			press_false(info, "not found\n");
+			print_error(info, "not found\n");
 		}
 	}
 }
 
 /**
- * fork_cmd - the heading of real pointer and zero values
- * @info: argument include temple used to preserve of  mission  model
+ * fork_cmd - forks a an exec thread to run cmd
+ * @info: the parameter & return info struct
  *
- * Return: Always 0
+ * Return: void
  */
 void fork_cmd(info_t *info)
 {
-	pid_t w;
+	pid_t child_pid;
 
-	w = fork();
-	if (w == -1)
+	child_pid = fork();
+	if (child_pid == -1)
 	{
-
+		/* TODO: PUT ERROR FUNCTION */
 		perror("Error:");
 		return;
 	}
-	if (w == 0)
+	if (child_pid == 0)
 	{
-		if (execve(info->path, info->argv, take_environ(info)) == -1)
+		if (execve(info->path, info->argv, get_environ(info)) == -1)
 		{
-			rid_data(info, 1);
+			free_info(info, 1);
 			if (errno == EACCES)
 				exit(126);
 			exit(1);
 		}
-
+		/* TODO: PUT ERROR FUNCTION */
 	}
 	else
 	{
@@ -151,7 +154,7 @@ void fork_cmd(info_t *info)
 		{
 			info->status = WEXITSTATUS(info->status);
 			if (info->status == 126)
-				press_false(info, "Permission denied\n");
+				print_error(info, "Permission denied\n");
 		}
 	}
 }
