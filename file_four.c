@@ -1,76 +1,77 @@
 #include "shell.h"
 
 /**
- * _extent - A function to return the lenght to a g iven string
- * @Stri_ng: The String given to check its length
+ * _strlen - returns the length of a string
+ * @s: the string whose length to check
  *
  * Return: integer length of string
  */
-int _extent(char *Stri_ng)
+int _strlen(char *s)
 {
-	int I = 0;
+	int i = 0;
 
-	if (!Stri_ng)
+	if (!s)
 		return (0);
 
-	while (*Stri_ng++)
-		I++;
-	return (I);
+	while (*s++)
+		i++;
+	return (i);
 }
 
 /**
- * _combine - compare two givin Strings
- * @Stri_ng1: the First givin Strang
- * @Stri_ng2: the Second givin Strang
+ * _strcmp - performs lexicogarphic comparison of two strangs.
+ * @s1: the first strang
+ * @s2: the second strang
  *
- * Return: - if Stri_ng1 < Stri_ng2
+ * Return: negative if s1 < s2, positive if s1 > s2, zero if s1 == s2
  */
-int _combine(char *Stri_ng1, char *Stri_ng2)
+int _strcmp(char *s1, char *s2)
 {
-	while (*Stri_ng1 && *Stri_ng2)
+	while (*s1 && *s2)
 	{
-		if (*Stri_ng1 != *Stri_ng2)
-			return (*Stri_ng1 - *Stri_ng2);
-		Stri_ng1++;
-		Stri_ng2++;
+		if (*s1 != *s2)
+			return (*s1 - *s2);
+		s1++;
+		s2++;
 	}
-	if (*Stri_ng1 == *Stri_ng2)
+	if (*s1 == *s2)
 		return (0);
 	else
-		return (*Stri_ng1 < *Stri_ng2 ? -1 : 1);
+		return (*s1 < *s2 ? -1 : 1);
 }
 
 /**
- * begins_with - checks if theres sub String in a givin String
- * @HaYstack : The String to searsh
- * @NEEDLE: the Substring we want to find to find
+ * starts_with - checks if needle starts with haystack
+ * @haystack: string to search
+ * @needle: the substring to find
  *
- * Return: address of next char of HaYstack  or NULL
+ * Return: address of next char of haystack or NULL
  */
-char *begins_with(const char *HaYstack, const char *NEEDLE)
+char *starts_with(const char *haystack, const char *needle)
 {
-	while (*NEEDLE)
-		if (*NEEDLE++ != *HaYstack++)
+	while (*needle)
+		if (*needle++ != *haystack++)
 			return (NULL);
-	return ((char *)HaYstack);
+	return ((char *)haystack);
 }
 
 /**
- * _concat - Merge two Givin strings
- * @De: the first givin
- * @Sourse: The the second givin
+ * _strcat - concatenates two strings
+ * @dest: the destination buffer
+ * @src: the source buffer
  *
  * Return: pointer to destination buffer
  */
-char *_concat(char *De, char *Sourse)
+char *_strcat(char *dest, char *src)
 {
-	char *Rt = De;
+	char *ret = dest;
 
-	while (*De)
-		De++;
-	while (*Sourse)
-		*De++ = *Sourse++;
-	*De = *Sourse;
-	return (Rt);
+	while (*dest)
+		dest++;
+	while (*src)
+		*dest++ = *src++;
+	*dest = *src;
+	return (ret);
 }
+
 
