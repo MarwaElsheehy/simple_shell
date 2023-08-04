@@ -34,6 +34,6 @@ int main(int ac, char **av)
 	}
 	reside_though_stream(info);
 	stay_record(info);
-	hsh(info, av);
+	compile(info, av);
 	return (EXIT_SUCCESS);
 }
