@@ -1,4 +1,3 @@
-
 /**
  * main - the main file
  * @ac: a char
