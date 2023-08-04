@@ -22,8 +22,7 @@ int main(int ac, char **av)
 	{
 		fd = open(v[1], O_RDONLY);
 		if (fd == -1)
-	@@ -30,9 +28,9 @@ int main()
-				exit(126);
+			exit(126);
 			if (errno == ENOENT)
 			{
 				_place(av[0]);
@@ -32,7 +31,6 @@ int main(int ac, char **av)
 				_design('\n');
 				_design(GUST_BULK);
 				exit(127);
-	@@ -43,6 +41,6 @@ int main()
 	}
 	reside_though_stream(info);
 	stay_record(info);
