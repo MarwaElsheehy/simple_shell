@@ -1,86 +1,74 @@
 #include "shell.h"
 
 /**
- * be_lead - starts the information data
- * @i: argument include temple used to preserve of  mission  model
- * @p: string struct
+ * interactive - returns true if shell is interactive mode
+ * @info: struct address
  *
- * Return: if success 0
+ * Return: 1 if interactive mode, 0 otherwise
  */
-int be_lead(info_t *i, char *p)
+int interactive(info_t *info)
 {
-	struct stat st;
+	return (isatty(STDIN_FILENO) && info->readfd <= 2);
+}
 
-	(void)i;
-	if (!p || stat(p, &st))
-		return (0);
-
-	if (st.st_mode & S_IFREG)
-	{
-		return (1);
-	}
+/**
+ * is_delim - checks if character is a delimeter
+ * @c: the char to check
+ * @delim: the delimeter string
+ * Return: 1 if true, 0 if false
+ */
+int is_delim(char c, char *delim)
+{
+	while (*delim)
+		if (*delim++ == c)
+			return (1);
 	return (0);
 }
 
 /**
- * call_edge - transform the chain to int
- * @j: the route chain
- * @k: begin of the pass 
- * @l: end of the pass
- *
- * Return: Always 0
+ *_isalpha - checks for alphabetic character
+ *@c: The character to input
+ *Return: 1 if c is alphabetic, 0 otherwise
  */
-char *call_edge(char *j, int k, int l)
-{
-	static char a[1024];
-	int b = 0, c = 0;
 
-	for (c = 0, b = c; b < l; b++)
-		if (j[b] != ':')
-			a[c++] = j[b];
-	a[k] = 0;
-	return (a);
+int _isalpha(int c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	else
+		return (0);
 }
 
 /**
- * detect_route - review if it is a deli or not
- * @v: review of the chain
- * @r: the route of chain
- * @d: to be found
- *
- * Return: return 0
+ *_atoi - converts a string to an integer
+ *@s: the string to be converted
+ *Return: 0 if no numbers in string, converted number otherwise
  */
-char *detect_route(info_t *v, char *r, char *d)
-{
-	int g = 0, u = 0;
-	char *t;
 
-	if (!r)
-		return (NULL);
-	if ((_extent(d) > 2) && begins_with(d, "./"))
+int _atoi(char *s)
+{
+	int i, sign = 1, flag = 0, output;
+	unsigned int result = 0;
+
+	for (i = 0;  s[i] != '\0' && flag != 2; i++)
 	{
-		if (be_lead(v, d))
-			return (d);
-	}
-	while (1)
-	{
-		if (!r[g] || r[g] == ':')
+		if (s[i] == '-')
+			sign *= -1;
+
+		if (s[i] >= '0' && s[i] <= '9')
 		{
-			t = call_edge(r, u, g);
-			if (!*t)
-				_concat(t, d);
-			else
-			{
-				_concat(t, "/");
-				_concat(t, d);
-			}
-			if (be_lead(v, t))
-				return (t);
-			if (!r[g])
-				break;
-			u = g;
+			flag = 1;
+			result *= 10;
+			result += (s[i] - '0');
 		}
-		g++;
+		else if (flag == 1)
+			flag = 2;
 	}
-	return (NULL);
+
+	if (sign == -1)
+		output = -result;
+	else
+		output = result;
+
+	return (output);
 }
