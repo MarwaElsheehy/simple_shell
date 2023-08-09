@@ -1,157 +1,97 @@
 #include "shell.h"
 
 /**
- * compile - rid of vars of the parameters
- * @i: heading of struct
- * @v: the heading of zeros
- *
- * Return: if success 0
+ * _myexit - exits the shell
+ * @info: Structure containing potential arguments. Used to maintain
+ *          constant function prototype.
+ *  Return: exits with a given exit status
+ *         (0) if info.argv[0] != "exit"
  */
-int compile(info_t *i, char **v)
+int _myexit(info_t *info)
 {
-	ssize_t y = 0;
-	int t = 0;
+	int exitcheck;
 
-	while (y != -1 && t != -2)
+	if (info->argv[1])  /* If there is an exit arguement */
 	{
-		remove_data(i);
-		if (honest(i))
-			_lay("$ ");
-		_design(GUST_BULK);
-		y = take_chip(i);
-		if (y != -1)
+		exitcheck = _erratoi(info->argv[1]);
+		if (exitcheck == -1)
 		{
-			suit_data(i, v);
-			t = detect_formation(i);
-			if (t == -1)
-				detect_lead(i);
+			info->status = 2;
+			print_error(info, "Illegal number: ");
+			_eputs(info->argv[1]);
+			_eputchar('\n');
+			return (1);
 		}
-		else if (honest(i))
-			_force('\n');
-		rid_data(i, 0);
+		info->err_num = _erratoi(info->argv[1]);
+		return (-2);
 	}
-	boost_record(i);
-	rid_data(i, 1);
-	if (!honest(i) && i->status)
-		exit(i->status);
-	if (t == -2)
-	{
-		if (i->err_num == -1)
-			exit(i->status);
-		exit(i->err_num);
-	}
-	return (t);
+	info->err_num = -1;
+	return (-2);
 }
 
 /**
- * detect_formation - suit the anonymity to the chain
- * @a: review of the chain
- *
- * Return: if successn 0 otherwise 1
+ * _mycd - changes the current directory of the process
+ * @info: Structure containing potential arguments. Used to maintain
+ *          constant function prototype.
+ *  Return: Always 0
  */
-int detect_formation(info_t *a)
+int _mycd(info_t *info)
 {
-	int b, f = -1;
-	builtin_table formation[] = {
-		{"exit", _outlet},
-		{"env", _though},
-		{"help", _assist},
-		{"history", _common},
-		{"setenv", response},
-		{"unsetenv", unresponse},
-		{"cd", _compress},
-		{"alias", _anonymity},
-		{NULL, NULL}
-	};
+	char *s, *dir, buffer[1024];
+	int chdir_ret;
 
-	for (b = 0; formation[b].kind; b++)
-		if (_combine(a->argv[0], formation[b].kind) == 0)
-		{
-			a->line_count++;
-			f = formation[b].tsk(a);
-			break;
-		}
-	return (f);
-}
-
-/**
- * detect_lead - review if it is a deli or not
- * @j: argument include temple used to preserve of  mission  model
- *
- * Return: Always 0
- */
-void detect_lead(info_t *j)
-{
-	char *h = NULL;
-	int x, k;
-
-	j->path = j->argv[0];
-	if (j->linecount_flag == 1)
+	s = getcwd(buffer, 1024);
+	if (!s)
+		_puts("TODO: >>getcwd failure emsg here<<\n");
+	if (!info->argv[1])
 	{
-		j->line_count++;
-		j->linecount_flag = 0;
+		dir = _getenv(info, "HOME=");
+		if (!dir)
+			chdir_ret = /* TODO: what should this be? */
+				chdir((dir = _getenv(info, "PWD=")) ? dir : "/");
+		else
+			chdir_ret = chdir(dir);
 	}
-	for (x = 0, k = 0; j->arg[x]; x++)
-		if (!be_locate(j->arg[x], " \t\n"))
-			k++;
-	if (!k)
-		return;
-
-	h = detect_route(j, _takethough(j, "PATH="), j->argv[0]);
-	if (h)
+	else if (_strcmp(info->argv[1], "-") == 0)
 	{
-		j->path = h;
-		spine_command(j);
+		if (!_getenv(info, "OLDPWD="))
+		{
+			_puts(s);
+			_putchar('\n');
+			return (1);
+		}
+		_puts(_getenv(info, "OLDPWD=")), _putchar('\n');
+		chdir_ret = /* TODO: what should this be? */
+			chdir((dir = _getenv(info, "OLDPWD=")) ? dir : "/");
+	}
+	else
+		chdir_ret = chdir(info->argv[1]);
+	if (chdir_ret == -1)
+	{
+		print_error(info, "can't cd to ");
+		_eputs(info->argv[1]), _eputchar('\n');
 	}
 	else
 	{
-		if ((honest(j) || _takethough(j, "PATH=")
-			|| j->argv[0][0] == '/') && be_lead(j, j->argv[0]))
-			spine_command(j);
-		else if (*(j->arg) != '\n')
-		{
-			j->status = 127;
-			press_false(j, "not found\n");
-		}
+		_setenv(info, "OLDPWD", _getenv(info, "PWD="));
+		_setenv(info, "PWD", getcwd(buffer, 1024));
 	}
+	return (0);
 }
 
 /**
- * spine_command - the heading of real pointer and zero values
- * @q: argument include temple used to preserve of  mission  model
- *
- * Return: Always 0
+ * _myhelp - changes the current directory of the process
+ * @info: Structure containing potential arguments. Used to maintain
+ *          constant function prototype.
+ *  Return: Always 0
  */
-void spine_command(info_t *q)
+int _myhelp(info_t *info)
 {
-	pid_t w;
+	char **arg_array;
 
-	w = fork();
-	if (w == -1)
-	{
-		
-		perror("Error:");
-		return;
-	}
-	if (w == 0)
-	{
-		if (execve(q->path, q->argv, take_environ(q)) == -1)
-		{
-			rid_data(q, 1);
-			if (errno == EACCES)
-				exit(126);
-			exit(1);
-		}
-		
-	}
-	else
-	{
-		wait(&(q->status));
-		if (WIFEXITED(q->status))
-		{
-			q->status = WEXITSTATUS(q->status);
-			if (q->status == 126)
-				press_false(q, "Permission denied\n");
-		}
-	}
+	arg_array = info->argv;
+	_puts("help call works. Function not yet implemented \n");
+	if (0)
+		_puts(*arg_array); /* temp att_unused workaround */
+	return (0);
 }
